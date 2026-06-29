@@ -4,850 +4,929 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Spratt Labs — The Spratt Bed™ powered by SprattOS™ | Intelligent Pet Wellness</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta name="description" content="The intelligent dog bed that keeps your dog and your home fresh — sensing, airflow, purification, and pet-safe scent, all under your control. Powered by SprattOS™.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --navy:#0A1B33;
-  --navy-2:#0E2748;
-  --ink:#15263F;
-  --drift:#2E7DFF;
-  --drift-2:#5BA3FF;
-  --amber:#FF9136;
-  --amber-deep:#F0721A;
-  --mist:#DCEBFF;
-  --cream:#FFF7EE;
-  --paper:#FFFFFF;
-  --muted:#5C6B82;
-  --line:rgba(11,31,63,.10);
-  --shadow:0 24px 60px -20px rgba(10,27,51,.28);
+  /* Monochrome system — white bg, black ink, neutral grays */
+  --bg:#ffffff; --alt:#f6f7f8; --card:#ffffff;
+  --ink:#101214; --body:#45484e; --mute:#797d84; --dim:#a6aab1;
+  --line:rgba(16,18,20,.10); --line-2:rgba(16,18,20,.17);
+  --chip:#f1f2f4; --chip-line:rgba(16,18,20,.10);
+  /* The single accent — used ONLY on key feature names */
+  --blue:#0b57d0; --blue-strong:#0a49ad;
+  --sh-sm:0 1px 2px rgba(16,24,40,.05);
+  --sh:0 6px 22px -10px rgba(16,24,40,.16);
+  --sh-lg:0 34px 80px -34px rgba(16,24,40,.22);
+  --maxw:1200px;
 }
-*{margin:0;padding:0;box-sizing:border-box}
+*{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Inter',sans-serif;color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased;overflow-x:hidden}
-h1,h2,h3,.display{font-family:'Bricolage Grotesque',sans-serif;letter-spacing:-.02em;line-height:1.02}
-a{color:inherit}
-.tm{font-size:.62em;vertical-align:super;font-weight:600;opacity:.85}
-.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
-.eyebrow{font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--amber-deep)}
+body{margin:0; background:var(--bg); color:var(--body);
+  font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x:hidden}
+a{color:inherit; text-decoration:none}
+h1,h2,h3,h4{font-family:"Sora",system-ui,sans-serif; color:var(--ink); margin:0; line-height:1.07; letter-spacing:-.02em; font-weight:600}
+h1{font-size:clamp(2.5rem,6.2vw,4.6rem)}
+h2{font-size:clamp(1.9rem,3.8vw,3rem)}
+h3{font-size:1.15rem; font-weight:600; letter-spacing:-.01em}
+p{margin:0 0 1rem}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 26px}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace}
+.eyebrow{font-family:"JetBrains Mono",monospace; font-size:.7rem; font-weight:500;
+  letter-spacing:.22em; text-transform:uppercase; color:var(--mute); margin:0 0 18px}
+.lead{font-size:1.1rem; color:var(--body); max-width:54ch}
+.muted{color:var(--mute)}
 
-.ticker{background:var(--navy);color:#cfe0ff;font-size:13px;font-weight:600;letter-spacing:.04em;text-align:center;padding:9px 16px}
-.ticker b{color:#fff}
-.ticker .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#36d17a;margin-right:7px;vertical-align:middle;animation:pulse 2.2s infinite}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(54,209,122,.6)}70%{box-shadow:0 0 0 9px rgba(54,209,122,0)}100%{box-shadow:0 0 0 0 rgba(54,209,122,0)}}
+/* key feature name — the only blue text on the page */
+.feat{color:var(--blue)}
 
-header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-.nav{display:flex;align-items:center;justify-content:space-between;height:68px}
-.logo{font-family:'Bricolage Grotesque';font-weight:800;font-size:21px;color:var(--navy);letter-spacing:-.01em}
-.logo span{color:var(--drift)}
-.nav nav{display:flex;gap:28px}
-.nav nav a{text-decoration:none;color:var(--muted);font-weight:600;font-size:15px;transition:color .2s}
-.nav nav a:hover{color:var(--navy)}
-.nav-cta{background:var(--amber);color:#fff;padding:11px 20px;border-radius:999px;text-decoration:none;font-weight:700;font-size:14px;box-shadow:0 8px 18px -8px var(--amber-deep);transition:transform .15s}
-.nav-cta:hover{transform:translateY(-1px)}
-@media(max-width:900px){.nav nav{display:none}}
+/* announce */
+.announce{background:var(--alt); border-bottom:1px solid var(--line); text-align:center}
+.announce .wrap{padding:9px 26px; font-family:"JetBrains Mono",monospace; font-size:.68rem;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--mute)}
+.announce b{color:var(--ink); font-weight:600}
+.announce .dot{display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--ink);
+  margin-right:8px; vertical-align:middle; animation:pulse 2.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(16,18,20,.32)}70%{box-shadow:0 0 0 7px rgba(16,18,20,0)}100%{box-shadow:0 0 0 0 rgba(16,18,20,0)}}
 
-.hero{position:relative;padding:84px 0 64px;background:radial-gradient(1100px 520px at 78% -8%, #d9ebff 0%, transparent 55%),linear-gradient(180deg,#fbfdff 0%, #fff 70%);overflow:hidden}
-.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:54px;align-items:center;position:relative;z-index:2}
-.hero h1{font-size:clamp(40px,6vw,68px);color:var(--navy);margin:18px 0 22px}
-.hero h1 em{font-style:normal;color:var(--drift)}
-.lede{font-size:19px;line-height:1.5;color:var(--muted);max-width:560px;margin-bottom:30px}
-.hero-cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
-.btn{display:inline-flex;align-items:center;gap:9px;padding:16px 26px;border-radius:999px;font-weight:700;text-decoration:none;font-size:16px;border:0;cursor:pointer;transition:transform .15s,box-shadow .2s}
-.btn-primary{background:var(--amber);color:#fff;box-shadow:0 14px 28px -12px var(--amber-deep)}
-.btn-primary:hover{transform:translateY(-2px)}
-.btn-ghost{background:#fff;color:var(--navy);border:1.5px solid var(--line)}
-.btn-ghost:hover{border-color:var(--drift);color:var(--drift)}
-.trust{margin-top:22px;display:flex;gap:22px;color:var(--muted);font-size:14px;font-weight:600;flex-wrap:wrap}
-.trust span{display:flex;align-items:center;gap:7px}
-.trust b{color:var(--navy)}
+/* header */
+header{position:sticky; top:0; z-index:60; background:rgba(255,255,255,.84); backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line)}
+.bar{max-width:var(--maxw); margin:0 auto; padding:14px 26px; display:flex; align-items:center; gap:32px}
+.brand{display:flex; align-items:center; gap:11px; white-space:nowrap}
+.logo-mark{width:32px; height:32px; flex:none; display:flex; align-items:center; justify-content:center}
+.logo-mark svg{width:32px; height:32px; display:block}
+.brand .word{font-family:"Sora",sans-serif; font-weight:700; color:var(--ink); letter-spacing:.26em; font-size:.92rem}
+nav.main{display:flex; gap:28px; margin-left:auto}
+nav.main a{font-size:.78rem; color:var(--body); position:relative; padding:4px 0; transition:color .2s}
+nav.main a:hover{color:var(--ink)}
+nav.main a::after{content:""; position:absolute; left:0; bottom:-2px; height:1.5px; width:0; background:var(--ink); transition:width .25s}
+nav.main a:hover::after{width:100%}
+.nav-cta{margin-left:6px; background:var(--ink); color:#fff; padding:10px 18px; border-radius:5px;
+  font-size:.78rem; font-weight:500; white-space:nowrap; transition:background .2s; box-shadow:var(--sh-sm)}
+.nav-cta:hover{background:#2a2d31}
+.menu-btn{display:none; margin-left:auto; background:none; border:1px solid var(--line-2); color:var(--ink);
+  padding:8px 12px; border-radius:5px; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; cursor:pointer}
 
-.stage{position:relative;height:440px;border-radius:34px;overflow:hidden;background:linear-gradient(145deg,#eaf3ff 0%, #fff4e6 100%);box-shadow:var(--shadow);border:1px solid #fff}
-.drift-svg{position:absolute;inset:0;width:100%;height:100%}
-.drift-path{fill:none;stroke:var(--drift);stroke-width:2;opacity:.22;stroke-dasharray:14 22;animation:flow 9s linear infinite}
-.drift-path.d2{stroke:var(--amber);opacity:.3;animation-duration:12s;stroke-dasharray:10 26}
-.drift-path.d3{stroke:var(--drift-2);opacity:.18;animation-duration:7s}
-@keyframes flow{to{stroke-dashoffset:-360}}
-.bed{position:absolute;left:50%;bottom:54px;transform:translateX(-50%);width:60%;height:120px;border-radius:80px;background:linear-gradient(160deg,var(--drift),#1f63e0);box-shadow:0 26px 40px -18px rgba(31,99,224,.6);display:flex;align-items:center;justify-content:center}
-.bed::before{content:"";position:absolute;inset:14px 40px auto 40px;height:34px;border-radius:40px;background:rgba(255,255,255,.18)}
-.bed-dog{font-size:46px;filter:drop-shadow(0 6px 8px rgba(0,0,0,.2))}
-.halo{position:absolute;left:50%;bottom:50px;transform:translateX(-50%);border:2px solid rgba(46,125,255,.28);border-radius:50%;animation:rise 6s ease-in-out infinite}
-.halo.h1{width:280px;height:280px}
-.halo.h2{width:420px;height:420px;animation-delay:1.4s;border-color:rgba(255,145,54,.24)}
-@keyframes rise{0%,100%{transform:translateX(-50%) scale(1);opacity:.6}50%{transform:translateX(-50%) scale(1.06);opacity:.3}}
-.chip{position:absolute;background:#fff;border-radius:16px;padding:12px 15px;box-shadow:0 16px 30px -14px rgba(10,27,51,.4);font-size:13px;font-weight:700;color:var(--navy);display:flex;align-items:center;gap:9px}
-.chip i{font-style:normal;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-size:15px}
-.chip.c1{top:26px;left:24px}.chip.c1 i{background:#e6f0ff;color:var(--drift)}
-.chip.c2{top:30px;right:26px}.chip.c2 i{background:#fff0e0;color:var(--amber-deep)}
-.chip.c3{bottom:26px;right:30px}.chip.c3 i{background:#e4f8ee;color:#16a45c}
+/* buttons */
+.btn{display:inline-flex; align-items:center; gap:9px; padding:15px 26px; border-radius:6px;
+  font-size:.86rem; font-weight:500; transition:.2s; cursor:pointer; border:0}
+.btn-blue{background:var(--ink); color:#fff; box-shadow:var(--sh)}
+.btn-blue:hover{background:#2a2d31}
+.btn-ghost{border:1px solid var(--line-2); color:var(--ink); background:#fff}
+.btn-ghost:hover{border-color:var(--ink); background:var(--chip)}
+.btn svg{width:16px; height:16px}
 
-.ks-badge{display:inline-flex;align-items:center;gap:10px;background:#05CE78;color:#fff;font-weight:700;font-size:14px;padding:10px 16px;border-radius:999px;text-decoration:none;box-shadow:0 12px 26px -10px rgba(5,206,120,.6);transition:transform .15s}
-.ks-badge:hover{transform:translateY(-1px)}
-.ks-badge .kmark{width:22px;height:22px;border-radius:6px;background:#fff;color:#05CE78;display:grid;place-items:center;font-family:'Bricolage Grotesque';font-weight:800;font-size:15px;line-height:1}
-.hero .ks-badge{margin-bottom:20px}
-.final .ks-badge{margin-top:22px;background:#fff;color:#05CE78}
-.final .ks-badge .kmark{background:#05CE78;color:#fff}
+/* hero */
+.hero{position:relative; overflow:hidden; border-bottom:1px solid var(--line);
+  background:radial-gradient(110% 75% at 82% -5%, var(--alt) 0%, transparent 56%), var(--bg)}
+.hero .wrap{display:grid; grid-template-columns:1.05fr .95fr; gap:52px; align-items:center; padding-top:78px; padding-bottom:78px}
+.hero h1{margin-bottom:22px}
+.hero h1 em{font-style:normal; color:var(--ink)}
+.trust{display:flex; gap:22px; flex-wrap:wrap; margin-top:28px; padding-top:24px; border-top:1px solid var(--line)}
+.trust span{font-family:"JetBrains Mono",monospace; font-size:.7rem; letter-spacing:.04em; color:var(--mute); display:flex; align-items:center; gap:7px}
+.trust span svg{color:var(--ink)}
+.trust span b{color:var(--ink); font-weight:600}
+.hbtns{display:flex; gap:13px; flex-wrap:wrap}
 
-.fund{background:var(--navy);color:#fff;padding:40px 0}
-.fund-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:48px;align-items:center}
-.fund .label{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#7fa6e6;font-weight:700;margin-bottom:14px}
-.fund .raised{font-family:'Bricolage Grotesque';font-size:clamp(34px,5vw,52px);font-weight:800;line-height:1}
-.fund .raised small{font-size:.42em;color:#9db8e6;font-weight:600;margin-left:8px}
-.bar{height:13px;border-radius:999px;background:rgba(255,255,255,.12);margin:20px 0 14px;overflow:hidden}
-.bar-fill{height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--amber),#ffb066);transition:width 1.2s cubic-bezier(.16,1,.3,1)}
-.fund-stats{display:flex;gap:34px;flex-wrap:wrap}
-.fund-stats div b{font-family:'Bricolage Grotesque';font-size:26px;font-weight:800;display:block}
-.fund-stats div span{font-size:13px;color:#9db8e6;font-weight:600}
-.countdown{background:var(--navy-2);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:24px}
-.countdown .t{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#7fa6e6;font-weight:700;margin-bottom:16px}
-.clock{display:flex;gap:12px}
-.clock div{flex:1;text-align:center;background:rgba(255,255,255,.05);border-radius:14px;padding:14px 6px}
-.clock b{font-family:'Bricolage Grotesque';font-size:30px;font-weight:800;display:block;line-height:1}
-.clock span{font-size:11px;color:#8fb0e6;letter-spacing:.08em;text-transform:uppercase}
-@media(max-width:860px){.fund-grid{grid-template-columns:1fr;gap:30px}}
+/* console (signature) — monochrome device UI; feature names in blue */
+.console{background:#fff; border:1px solid var(--line); border-radius:16px; padding:22px;
+  box-shadow:var(--sh-lg); position:relative; overflow:hidden}
+.console::before{content:""; position:absolute; top:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg,transparent,var(--line-2),transparent)}
+.console .chead{display:flex; justify-content:space-between; align-items:center; margin-bottom:18px}
+.console .chead .t{font-family:"JetBrains Mono",monospace; font-size:.66rem; letter-spacing:.16em; text-transform:uppercase; color:var(--mute)}
+.console .live{font-family:"JetBrains Mono",monospace; font-size:.62rem; letter-spacing:.14em; color:var(--ink); display:flex; align-items:center; gap:6px}
+.console .live i{width:6px; height:6px; border-radius:50%; background:var(--ink); animation:pulse 2.4s infinite; font-style:normal}
+.crow{display:flex; align-items:center; gap:13px; padding:13px 0; border-top:1px solid var(--line)}
+.crow:first-of-type{border-top:0}
+.crow .ic{width:34px; height:34px; border-radius:9px; background:var(--chip); border:1px solid var(--chip-line); display:flex; align-items:center; justify-content:center; color:var(--ink); flex:none}
+.crow .ic svg{width:17px; height:17px}
+.crow .lbl{flex:1}
+.crow .lbl b{display:block; color:var(--blue); font-size:.9rem; font-weight:600; font-family:"Sora",sans-serif}
+.crow .lbl span{font-size:.74rem; color:var(--mute)}
+.crow .st{font-family:"JetBrains Mono",monospace; font-size:.66rem; letter-spacing:.06em; color:var(--mute); display:flex; align-items:center; gap:6px}
+.crow .st i{width:5px; height:5px; border-radius:50%; background:var(--ink); font-style:normal}
+.cmeter{margin-top:16px; padding-top:16px; border-top:1px solid var(--line)}
+.cmeter .top{display:flex; justify-content:space-between; font-family:"JetBrains Mono",monospace; font-size:.66rem; color:var(--mute); margin-bottom:8px; letter-spacing:.04em}
+.cmeter .top b{color:var(--ink)}
+.track{height:6px; border-radius:4px; background:var(--chip); overflow:hidden}
+.track i{display:block; height:100%; width:68%; background:var(--ink); font-style:normal}
 
-.sec{padding:96px 0}
-.sec-head{max-width:720px;margin-bottom:54px}
-.sec-head h2{font-size:clamp(32px,4.4vw,46px);color:var(--navy);margin:14px 0 16px}
-.sec-head p{font-size:18px;color:var(--muted);line-height:1.55}
+/* telemetry */
+.telem{border-bottom:1px solid var(--line); background:var(--alt)}
+.telem .grid{display:grid; grid-template-columns:repeat(4,1fr)}
+.tcell{padding:30px 26px; border-left:1px solid var(--line)}
+.tcell:first-child{border-left:0}
+.tcell .k{font-family:"JetBrains Mono",monospace; font-size:.64rem; letter-spacing:.14em; text-transform:uppercase; color:var(--mute); margin-bottom:10px}
+.tcell .v{font-family:"Sora",sans-serif; font-size:1.9rem; font-weight:600; color:var(--ink); line-height:1}
+.tcell .v small{font-size:.9rem; color:var(--mute); font-weight:400}
+.tcell .v .bl{color:var(--ink)}
+.cd{display:flex; gap:10px; margin-top:2px}
+.cd div{font-family:"JetBrains Mono",monospace; text-align:center}
+.cd .num{font-size:1.5rem; color:var(--ink); line-height:1.1}
+.cd .u{font-size:.55rem; letter-spacing:.12em; color:var(--dim); text-transform:uppercase}
 
-.problem{background:var(--cream)}
-.p-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.p-card{background:#fff;border-radius:22px;padding:30px;border:1px solid var(--line)}
-.p-card .ic{width:46px;height:46px;border-radius:13px;background:#fff0e0;color:var(--amber-deep);display:grid;place-items:center;font-size:22px;margin-bottom:18px}
-.p-card h3{font-size:19px;color:var(--navy);margin-bottom:8px}
-.p-card p{font-size:15px;color:var(--muted);line-height:1.5}
-@media(max-width:860px){.p-grid{grid-template-columns:1fr 1fr}}
+/* sections */
+section{padding:84px 0; position:relative}
+.shead{max-width:680px; margin-bottom:48px}
+.shead h2{margin-bottom:16px}
+.alt{background:var(--alt); border-top:1px solid var(--line); border-bottom:1px solid var(--line)}
 
-/* SprattOS stack */
-.os{background:linear-gradient(180deg,#fff,#fbfdff)}
-.stack-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
-.sc{background:#fff;border:1px solid var(--line);border-radius:22px;padding:24px;transition:transform .2s,box-shadow .2s}
-.sc:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
-.sc .badge{display:inline-flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque';font-weight:800;font-size:13px;background:#eef4ff;color:var(--drift);padding:6px 11px;border-radius:999px;margin-bottom:16px}
-.sc .ic{font-size:26px;margin-bottom:10px}
-.sc h3{font-size:18px;color:var(--navy);margin-bottom:8px}
-.sc p{font-size:14px;color:var(--muted);line-height:1.5}
-@media(max-width:980px){.stack-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:560px){.stack-grid{grid-template-columns:1fr}}
-.roadmap{margin-top:34px;background:#f3f8ff;border:1px solid var(--line);border-radius:22px;padding:26px 30px;display:flex;gap:20px;align-items:center}
-.roadmap .rb{flex:none;width:52px;height:52px;border-radius:15px;background:var(--drift);color:#fff;display:grid;place-items:center;font-size:24px}
-.roadmap h3{font-size:18px;color:var(--navy);margin-bottom:5px}
-.roadmap p{font-size:15px;color:var(--muted);line-height:1.5}
-.roadmap .tag{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--drift);background:#fff;border:1px solid var(--line);padding:4px 10px;border-radius:999px;margin-left:8px;white-space:nowrap}
-@media(max-width:560px){.roadmap{flex-direction:column;text-align:center}}
+/* problem */
+.pgrid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px}
+.pcard{background:#fff; border:1px solid var(--line); border-radius:13px; padding:26px; box-shadow:var(--sh-sm); transition:box-shadow .2s, transform .2s, border-color .2s}
+.pcard:hover{box-shadow:var(--sh); transform:translateY(-3px); border-color:var(--line-2)}
+.pcard .ic{width:42px; height:42px; border-radius:10px; background:var(--chip); border:1px solid var(--chip-line); display:flex; align-items:center; justify-content:center; color:var(--ink); margin-bottom:18px}
+.pcard .ic svg{width:21px; height:21px}
+.pcard h3{color:var(--ink); margin-bottom:8px}
+.pcard p{font-size:.88rem; color:var(--mute); margin:0}
 
-/* brand architecture */
-.arch{background:var(--cream)}
-.arch-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:54px;align-items:center}
-.arch-grid h2{font-size:clamp(30px,4.2vw,44px);color:var(--navy);margin:14px 0 16px}
-.arch-grid .ap{font-size:18px;color:var(--muted);line-height:1.6}
-.arch-box{background:linear-gradient(150deg,var(--drift),#1748c4);border-radius:30px;padding:14px 30px;box-shadow:0 28px 70px -28px rgba(8,43,95,.6)}
-.arch-box .r{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:17px 0;border-bottom:1px solid rgba(255,255,255,.16);color:#fff}
-.arch-box .r:last-child{border-bottom:none}
-.arch-box .r strong{color:#ffd9a8;font-size:13px;letter-spacing:.06em;text-transform:uppercase;font-weight:700}
-.arch-box .r span{font-family:'Bricolage Grotesque';font-weight:800;font-size:17px;text-align:right}
-@media(max-width:860px){.arch-grid{grid-template-columns:1fr;gap:34px}}
+/* callout */
+.callout{display:flex; gap:16px; align-items:flex-start; background:var(--chip); border:1px solid var(--line); border-radius:13px; padding:22px 24px; margin-bottom:42px; max-width:880px}
+.callout .ic{width:40px; height:40px; border-radius:10px; background:var(--ink); color:#fff; display:flex; align-items:center; justify-content:center; flex:none; box-shadow:var(--sh-sm)}
+.callout .ic svg{width:20px; height:20px}
+.callout b{color:var(--ink); font-family:"Sora",sans-serif; font-weight:600}
+.callout p{margin:4px 0 0; font-size:.92rem; color:var(--body)}
 
-.app{background:var(--navy);color:#fff}
-.app .sec-head h2{color:#fff}.app .sec-head p{color:#9db8e6}
-.app-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:54px;align-items:center}
-.phone{width:248px;margin:0 auto;background:linear-gradient(160deg,#11315c,#0a1f3d);border:8px solid #1c3a63;border-radius:38px;padding:18px;box-shadow:var(--shadow)}
-.phone .scr{background:linear-gradient(160deg,#163a6b,#0c2547);border-radius:22px;padding:20px;min-height:380px}
-.phone .now{font-size:12px;color:#8fb0e6;margin-bottom:6px}
-.phone .mode{font-family:'Bricolage Grotesque';font-size:24px;font-weight:800;margin-bottom:18px}
-.phone .ring{width:150px;height:150px;border-radius:50%;margin:0 auto 18px;background:conic-gradient(var(--amber) 0 68%, rgba(255,255,255,.12) 68% 100%);display:grid;place-items:center}
-.phone .ring div{width:118px;height:118px;border-radius:50%;background:#0c2547;display:grid;place-items:center;text-align:center}
-.phone .ring b{font-family:'Bricolage Grotesque';font-size:30px;display:block}
-.phone .ring span{font-size:11px;color:#8fb0e6}
-.scent{display:flex;gap:8px;justify-content:center}
-.scent span{font-size:11px;padding:7px 11px;border-radius:999px;background:rgba(255,255,255,.07);color:#cfe0ff;font-weight:600}
-.scent span.on{background:var(--amber);color:#fff}
-.feat{display:flex;flex-direction:column;gap:24px}
-.feat .row{display:flex;gap:16px;align-items:flex-start}
-.feat .row .ic{flex:none;width:46px;height:46px;border-radius:13px;background:rgba(46,125,255,.18);color:var(--drift-2);display:grid;place-items:center;font-size:21px}
-.feat .row h3{font-size:18px;margin-bottom:5px}
-.feat .row p{font-size:15px;color:#9db8e6;line-height:1.5}
-@media(max-width:860px){.app-grid{grid-template-columns:1fr;gap:40px}}
+/* os list — key features; names rendered blue */
+.oslist{border-top:1px solid var(--line)}
+.osrow{display:grid; grid-template-columns:64px 52px 1fr auto; gap:22px; align-items:center; padding:26px 0; border-bottom:1px solid var(--line); transition:background .2s}
+.osrow:hover{background:var(--chip)}
+.osrow .n{font-family:"JetBrains Mono",monospace; font-size:.9rem; color:var(--dim); letter-spacing:.05em}
+.osrow .ic{width:48px; height:48px; border-radius:11px; background:var(--chip); border:1px solid var(--chip-line); display:flex; align-items:center; justify-content:center; color:var(--ink)}
+.osrow .ic svg{width:23px; height:23px}
+.osrow .body h3{color:var(--blue); font-size:1.25rem; margin-bottom:4px}
+.osrow .body p{margin:0; font-size:.92rem; color:var(--mute); max-width:62ch}
+.osrow .tm{font-family:"JetBrains Mono",monospace; font-size:.66rem; color:var(--dim); letter-spacing:.1em; white-space:nowrap}
+.roadmap{display:flex; gap:16px; align-items:center; margin-top:30px; padding:22px 24px; border:1px dashed var(--line-2); border-radius:13px; background:var(--alt)}
+.roadmap .tag{font-family:"JetBrains Mono",monospace; font-size:.62rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ink); border:1px solid var(--line-2); border-radius:30px; padding:5px 12px; white-space:nowrap; background:#fff}
+.roadmap p{margin:0; font-size:.9rem; color:var(--body)}
+.roadmap b{color:var(--ink)}
 
-.scents-sec{background:linear-gradient(180deg,#fbfdff,#fff)}
-.scents-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:54px;align-items:center}
-.scent-points{display:flex;flex-direction:column;gap:22px;margin-top:6px}
-.scent-points .row{display:flex;gap:16px;align-items:flex-start}
-.scent-points .ic{flex:none;width:46px;height:46px;border-radius:13px;background:#eef4ff;color:var(--drift);display:grid;place-items:center;font-size:21px}
-.scent-points h3{font-size:18px;color:var(--navy);margin-bottom:5px}
-.scent-points p{font-size:15px;color:var(--muted);line-height:1.5}
-.vault{position:relative;background:linear-gradient(160deg,var(--navy),#0c2547);border-radius:26px;padding:38px 34px;color:#fff;box-shadow:var(--shadow);overflow:hidden}
-.vault::before{content:"";position:absolute;inset:0;background:radial-gradient(420px 220px at 80% 0,rgba(46,125,255,.35),transparent 60%);pointer-events:none}
-.vault .lock{display:inline-flex;align-items:center;gap:8px;background:rgba(255,145,54,.16);color:#ffb066;font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:8px 14px;border-radius:999px;margin-bottom:20px}
-.vault h3{font-family:'Bricolage Grotesque';font-size:26px;margin-bottom:12px;position:relative}
-.vault p{font-size:15px;color:#9db8e6;line-height:1.6;position:relative}
-.pods{display:flex;flex-direction:column;gap:12px;margin:24px 0;position:relative}
-.pod{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:14px 16px}
-.pod .swatch{width:38px;height:38px;border-radius:11px;flex:none;display:grid;place-items:center;font-size:18px}
-.pod .pi b{display:block;font-weight:700;font-size:15px}
-.pod .pi span{font-size:12px;color:#8fb0e6}
-.pod .blur{margin-left:auto;font-size:12px;font-weight:700;color:#8fb0e6;filter:blur(3px);user-select:none}
-.vault .note{display:flex;align-items:center;gap:10px;font-size:13px;color:#cfe0ff;background:rgba(255,255,255,.06);border-radius:14px;padding:14px;position:relative}
-@media(max-width:860px){.scents-grid{grid-template-columns:1fr;gap:38px}}
+/* value */
+.vgrid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px}
+.vcard{padding:28px; border:1px solid var(--line); border-radius:13px; background:#fff; box-shadow:var(--sh-sm)}
+.vcard .ic{color:var(--ink); margin-bottom:16px}
+.vcard .ic svg{width:25px; height:25px}
+.vcard h3{color:var(--ink); margin-bottom:8px}
+.vcard p{font-size:.86rem; color:var(--mute); margin:0}
+.vsplit{display:grid; grid-template-columns:1fr 1fr; gap:46px; align-items:center; margin-top:44px}
 
-.value{background:var(--cream)}
+/* image panel */
+.panel{position:relative; border:1px solid var(--line); border-radius:15px; overflow:hidden;
+  background:radial-gradient(95% 85% at 62% 22%, #eceef0, #f4f5f6 48%, #fff 88%);
+  aspect-ratio:4/3; display:flex; align-items:flex-end; padding:20px; box-shadow:var(--sh-sm)}
+.panel.tall{aspect-ratio:3/4}
+.panel .meta{font-family:"JetBrains Mono",monospace; font-size:.64rem; letter-spacing:.08em; color:var(--mute)}
+.panel .lines{position:absolute; inset:0; opacity:.5; pointer-events:none}
 
-.fit{background:#fff}
-.fit-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-.fit-card{background:#fff;border:1px solid var(--line);border-radius:24px;padding:22px;box-shadow:var(--shadow)}
-.fit-card .scene{background:linear-gradient(180deg,#f3f8ff,#fff);border-radius:18px;border:1px solid var(--line)}
-.fit-card svg{width:100%;height:auto;display:block}
-.fit-card .ft{font-family:'Bricolage Grotesque';font-size:23px;font-weight:800;color:var(--navy);margin:16px 0 2px}
-.fit-card .fsub{font-size:14px;color:var(--muted);margin-bottom:14px}
-.fit-specs{list-style:none;display:flex;flex-direction:column;gap:0}
-.fit-specs li{display:flex;justify-content:space-between;font-size:14px;color:var(--muted);border-top:1px dashed var(--line);padding:11px 0}
-.fit-specs li b{color:var(--navy);font-weight:700}
-.fabric{margin-top:30px;background:linear-gradient(150deg,var(--drift),#1748c4);color:#fff;border-radius:24px;padding:30px 34px;display:flex;gap:22px;align-items:center;flex-wrap:wrap}
-.fabric .fic{font-size:36px;flex:none}
-.fabric h3{font-size:21px;margin-bottom:6px}
-.fabric p{color:#dceaff;font-size:15px;line-height:1.55;max-width:780px}
-@media(max-width:760px){.fit-grid{grid-template-columns:1fr}}
+/* safety */
+.sgrid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px}
+.scard{padding:26px; border:1px solid var(--line); border-radius:13px; background:#fff; box-shadow:var(--sh-sm)}
+.scard .ic{width:42px; height:42px; border-radius:10px; background:var(--chip); border:1px solid var(--chip-line); display:flex; align-items:center; justify-content:center; color:var(--ink); margin-bottom:16px}
+.scard .ic svg{width:21px; height:21px}
+.scard h3{color:var(--ink); margin-bottom:8px}
+.scard p{font-size:.86rem; color:var(--mute); margin:0}
+.sealed{display:flex; gap:18px; align-items:center; margin-top:34px; padding:28px; border:1px solid var(--line); border-radius:15px; background:linear-gradient(180deg,#fff,var(--alt)); flex-wrap:wrap; box-shadow:var(--sh-sm)}
+.sealed .lock{width:50px; height:50px; border-radius:12px; background:var(--chip); border:1px solid var(--chip-line); display:flex; align-items:center; justify-content:center; color:var(--ink); flex:none}
+.sealed h3{color:var(--ink); margin-bottom:4px}
+.sealed p{margin:0; font-size:.9rem; color:var(--mute); max-width:62ch}
 
-.pledge{background:linear-gradient(180deg,#fff,#fbfdff)}
-.tier-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;align-items:stretch}
-.tier{display:flex;flex-direction:column;background:#fff;border:1.5px solid var(--line);border-radius:24px;padding:28px;position:relative;transition:transform .2s,box-shadow .2s,border-color .2s}
-.tier:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--drift)}
-.tier.feature{border-color:var(--amber);box-shadow:0 24px 50px -22px rgba(240,114,26,.45)}
-.tier .flag{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--amber);color:#fff;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:6px 14px;border-radius:999px;white-space:nowrap}
-.tier .tname{font-family:'Bricolage Grotesque';font-size:19px;font-weight:800;color:var(--navy);margin-bottom:6px}
-.tier .price{font-family:'Bricolage Grotesque';font-size:38px;font-weight:800;color:var(--navy);line-height:1}
-.tier .price s{font-size:16px;color:var(--muted);font-weight:600;margin-left:8px}
-.tier .save{font-size:13px;font-weight:700;color:#16a45c;margin:8px 0 16px}
-.tier ul{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:22px;flex:1}
-.tier li{font-size:14px;color:var(--ink);display:flex;gap:9px;align-items:flex-start;line-height:1.4}
-.tier li::before{content:"✓";color:var(--drift);font-weight:800;flex:none}
-.tier .pbtn{width:100%;padding:14px;border-radius:14px;border:0;font-weight:700;font-size:15px;cursor:pointer;background:var(--navy);color:#fff;transition:background .2s}
-.tier.feature .pbtn{background:var(--amber)}
-.tier .pbtn:hover{background:var(--drift)}
-.tier .left{font-size:12px;color:var(--muted);text-align:center;margin-top:10px;font-weight:600}
-@media(max-width:980px){.tier-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:560px){.tier-grid{grid-template-columns:1fr}}
+/* sizes */
+.fitgrid{display:grid; grid-template-columns:1fr 1fr; gap:18px}
+.fit{border:1px solid var(--line); border-radius:15px; padding:30px; background:#fff; box-shadow:var(--sh-sm)}
+.fit .top{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:20px}
+.fit .top h3{font-size:1.6rem; color:var(--ink)}
+.fit .top .sz{font-family:"JetBrains Mono",monospace; font-size:.72rem; color:var(--mute); letter-spacing:.06em}
+.fit p{font-size:.9rem; color:var(--mute)}
+.spec{display:flex; justify-content:space-between; padding:12px 0; border-top:1px solid var(--line); font-size:.86rem; font-family:"JetBrains Mono",monospace}
+.spec span{color:var(--mute); letter-spacing:.03em}
+.spec b{color:var(--ink); font-weight:600}
 
-.story{background:var(--cream)}
-.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:54px;align-items:center}
-.story-grid p{font-size:17px;color:var(--ink);line-height:1.65;margin-bottom:16px}
-.founder-card{background:#fff;border-radius:24px;padding:34px;border:1px solid var(--line);box-shadow:var(--shadow)}
-.founder-card .who{display:flex;align-items:center;gap:14px;margin-bottom:18px}
-.avatar{width:56px;height:56px;border-radius:50%;background:linear-gradient(145deg,var(--drift),var(--amber));display:grid;place-items:center;color:#fff;font-family:'Bricolage Grotesque';font-weight:800;font-size:22px}
-.founder-card .who b{font-family:'Bricolage Grotesque';font-size:18px;color:var(--navy);display:block}
-.founder-card .who span{font-size:13px;color:var(--muted)}
-.quote{font-family:'Bricolage Grotesque';font-size:21px;color:var(--navy);line-height:1.35;font-weight:600}
-@media(max-width:860px){.story-grid{grid-template-columns:1fr;gap:34px}}
+/* pledge */
+.ptiers{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; align-items:stretch}
+.tier{border:1px solid var(--line); border-radius:15px; padding:26px; background:#fff; display:flex; flex-direction:column; box-shadow:var(--sh-sm)}
+.tier.feat{border-color:var(--ink); box-shadow:0 0 0 1px var(--ink), var(--sh-lg)}
+.tier .badge{font-family:"JetBrains Mono",monospace; font-size:.58rem; letter-spacing:.14em; text-transform:uppercase; color:var(--mute); margin-bottom:14px; min-height:14px}
+.tier h3{color:var(--ink); font-size:1.15rem; margin-bottom:10px}
+.tier .price{font-family:"Sora",sans-serif; font-size:2.1rem; font-weight:600; color:var(--ink); line-height:1; margin-bottom:4px}
+.tier .price s{font-size:1rem; color:var(--dim); font-weight:400; margin-left:6px}
+.tier .sub{font-size:.74rem; color:var(--mute); font-family:"JetBrains Mono",monospace; letter-spacing:.03em; margin-bottom:18px}
+.tier ul{list-style:none; padding:0; margin:0 0 22px; flex:1}
+.tier li{position:relative; padding:7px 0 7px 24px; font-size:.85rem; color:var(--body); border-top:1px solid var(--line)}
+.tier li:first-child{border-top:0}
+.tier li::before{content:""; position:absolute; left:0; top:13px; width:11px; height:7px; border-left:1.8px solid var(--ink); border-bottom:1.8px solid var(--ink); transform:rotate(-45deg)}
+.tier .btn{width:100%; justify-content:center}
+.tier .note{font-family:"JetBrains Mono",monospace; font-size:.62rem; color:var(--dim); text-align:center; margin:12px 0 0; letter-spacing:.04em}
 
-.faq-list{max-width:780px;margin:0 auto}
-details{border-bottom:1px solid var(--line);padding:22px 0}
-summary{font-family:'Bricolage Grotesque';font-size:19px;font-weight:700;color:var(--navy);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
-summary::-webkit-details-marker{display:none}
-summary .pm{flex:none;width:28px;height:28px;border-radius:8px;background:#eef4ff;color:var(--drift);display:grid;place-items:center;font-size:18px;transition:transform .2s}
-details[open] summary .pm{transform:rotate(45deg)}
-details p{margin-top:14px;font-size:16px;color:var(--muted);line-height:1.6}
+/* story */
+.story{display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center}
+.story p{color:var(--body)}
+.quote{border-left:3px solid var(--ink); padding:6px 0 6px 22px; margin:24px 0 0}
+.quote p{font-family:"Sora",sans-serif; font-size:1.15rem; color:var(--ink); font-weight:400; font-style:italic; margin-bottom:14px}
+.quote .who{font-family:"JetBrains Mono",monospace; font-size:.68rem; letter-spacing:.08em; color:var(--mute)}
+.quote .who b{color:var(--ink)}
 
-.final{background:linear-gradient(150deg,var(--drift),#1748c4);color:#fff;text-align:center;padding:96px 0}
-.final h2{font-size:clamp(34px,5vw,52px);margin-bottom:18px}
-.final p{font-size:19px;color:#dceaff;max-width:560px;margin:0 auto 32px}
-.final .btn-primary{background:#fff;color:var(--drift)}
-.final .btn-primary:hover{background:var(--cream)}
+/* faq */
+.faq{max-width:840px}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none; cursor:pointer; padding:22px 44px 22px 0; position:relative; font-family:"Sora",sans-serif; font-weight:600; color:var(--ink); font-size:1.08rem}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:""; position:absolute; right:8px; top:27px; width:11px; height:11px; border-right:1.8px solid var(--ink); border-bottom:1.8px solid var(--ink); transform:rotate(45deg); transition:transform .25s}
+.faq details[open] summary::after{transform:rotate(-135deg)}
+.faq .ans{padding:0 44px 24px 0; color:var(--mute); font-size:.94rem}
 
-footer{background:var(--navy);color:#8fb0e6;padding:40px 0;font-size:14px}
-.foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
-.foot .logo{color:#fff}.foot .logo span{color:var(--drift-2)}
-.foot a{color:#8fb0e6;text-decoration:none;margin-left:22px}
-.foot a:hover{color:#fff}
+/* final */
+.final{text-align:center; border-top:1px solid var(--line); background:radial-gradient(75% 120% at 50% 0%, var(--chip), transparent 60%), var(--alt)}
+.final h2{margin-bottom:16px}
+.final .hbtns{justify-content:center; margin-top:26px}
+.final .spots{font-family:"JetBrains Mono",monospace; font-size:.72rem; color:var(--mute); letter-spacing:.08em; margin-top:18px}
+.final .spots b{color:var(--ink)}
 
-.overlay{position:fixed;inset:0;background:rgba(10,27,51,.6);backdrop-filter:blur(4px);z-index:200;display:none;align-items:center;justify-content:center;padding:24px}
-.overlay.show{display:flex}
-.modal{background:#fff;border-radius:24px;max-width:440px;width:100%;padding:34px;box-shadow:var(--shadow);position:relative}
-.modal .x{position:absolute;top:18px;right:18px;background:#f1f5fb;border:0;width:34px;height:34px;border-radius:10px;font-size:18px;cursor:pointer;color:var(--muted)}
-.modal h3{font-size:24px;color:var(--navy);margin-bottom:6px}
-.modal .sub{font-size:15px;color:var(--muted);margin-bottom:22px;line-height:1.5}
-.modal .pill{display:inline-flex;gap:8px;align-items:center;background:#eef4ff;color:var(--drift);font-weight:700;font-size:13px;padding:7px 13px;border-radius:999px;margin-bottom:18px}
-.modal label{font-size:13px;font-weight:700;color:var(--navy);display:block;margin-bottom:7px}
-.modal input{width:100%;padding:14px 16px;border:1.5px solid var(--line);border-radius:13px;font-size:15px;font-family:inherit;margin-bottom:18px}
-.modal input:focus{outline:none;border-color:var(--drift)}
-.modal .go{width:100%;padding:15px;border-radius:13px;border:0;background:var(--amber);color:#fff;font-weight:700;font-size:16px;cursor:pointer}
-.modal .go:hover{background:var(--amber-deep)}
-.modal .fine{font-size:12px;color:var(--muted);text-align:center;margin-top:14px;line-height:1.5}
-.success{text-align:center}
-.success .check{width:64px;height:64px;border-radius:50%;background:#e4f8ee;color:#16a45c;display:grid;place-items:center;font-size:32px;margin:0 auto 18px}
+/* footer */
+footer{border-top:1px solid var(--line); background:var(--alt)}
+.fmain{max-width:var(--maxw); margin:0 auto; padding:40px 26px; display:flex; gap:26px; align-items:center; flex-wrap:wrap}
+.fmain .brand .word{font-size:.86rem}
+.fnav{display:flex; gap:22px; margin-left:auto; flex-wrap:wrap}
+.fnav a{font-size:.74rem; color:var(--mute)}
+.fnav a:hover{color:var(--ink)}
+.legal{max-width:var(--maxw); margin:0 auto; padding:0 26px 38px}
+.legal p{font-size:.7rem; color:var(--dim); border-top:1px solid var(--line); padding-top:20px; margin:0; line-height:1.7; font-family:"JetBrains Mono",monospace; letter-spacing:.01em}
 
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* health & safety — what's in / out + benefits */
+.inout{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:34px}
+.iocol{border:1px solid var(--line); border-radius:15px; padding:26px 28px; background:#fff; box-shadow:var(--sh-sm)}
+.iocol h3{color:var(--ink); margin-bottom:14px; font-size:1.05rem; display:flex; align-items:center; gap:10px}
+.iocol h3 .mk{width:24px; height:24px; border-radius:7px; display:flex; align-items:center; justify-content:center; flex:none; border:1px solid var(--chip-line); background:var(--chip); color:var(--ink)}
+.iocol h3 .mk svg{width:14px; height:14px}
+.iolist{list-style:none; padding:0; margin:0}
+.iolist li{position:relative; padding:9px 0 9px 26px; font-size:.88rem; color:var(--body); border-top:1px solid var(--line)}
+.iolist li:first-child{border-top:0}
+.iolist.use li::before{content:""; position:absolute; left:1px; top:14px; width:11px; height:7px; border-left:1.8px solid var(--ink); border-bottom:1.8px solid var(--ink); transform:rotate(-45deg)}
+.iolist.lose li{color:var(--mute)}
+.iolist.lose li::before{content:"\00d7"; position:absolute; left:2px; top:7px; font-size:1.05rem; line-height:1; color:var(--dim)}
+.bens{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:34px}
+.ben{border:1px solid var(--line); border-radius:13px; padding:22px; background:#fff; box-shadow:var(--sh-sm)}
+.ben .ic{color:var(--ink); margin-bottom:12px}
+.ben .ic svg{width:22px; height:22px}
+.ben h3{color:var(--ink); font-size:1rem; margin-bottom:6px}
+.ben p{font-size:.84rem; color:var(--mute); margin:0}
+.devnote{font-family:"JetBrains Mono",monospace; font-size:.66rem; color:var(--dim); letter-spacing:.02em; margin-top:26px; line-height:1.7; max-width:780px}
+
+/* team */
+.tgrid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px}
+.tmember{border:1px solid var(--line); border-radius:15px; padding:26px; background:#fff; box-shadow:var(--sh-sm); transition:box-shadow .2s, transform .2s, border-color .2s}
+.tmember:hover{box-shadow:var(--sh); transform:translateY(-3px); border-color:var(--line-2)}
+.tmember .av{width:54px; height:54px; border-radius:50%; background:var(--chip); border:1px solid var(--chip-line); display:flex; align-items:center; justify-content:center; font-family:"Sora",sans-serif; font-weight:600; color:var(--ink); font-size:1rem; letter-spacing:.02em; margin-bottom:16px}
+.tmember .av svg{width:24px; height:24px; color:var(--ink)}
+.tmember h3{color:var(--ink); margin-bottom:3px; font-size:1.05rem}
+.tmember .role{font-family:"JetBrains Mono",monospace; font-size:.62rem; letter-spacing:.11em; text-transform:uppercase; color:var(--mute); margin-bottom:12px}
+.tmember p{font-size:.85rem; color:var(--mute); margin:0}
+
+
+/* pledger journey + email signup */
+.journey{margin-top:34px; border:1px solid var(--line); border-radius:16px; background:#fff; padding:34px; box-shadow:var(--sh-sm)}
+.journey .eyebrow{margin-bottom:12px}
+.journey > h3{font-size:1.5rem; color:var(--ink)}
+.jgrid{display:grid; grid-template-columns:repeat(2,1fr); gap:18px 30px; margin:24px 0 4px}
+.jrow{display:flex; gap:13px; align-items:flex-start}
+.jrow .ic{width:36px; height:36px; border-radius:9px; background:var(--chip); border:1px solid var(--chip-line); display:flex; align-items:center; justify-content:center; color:var(--ink); flex:none}
+.jrow .ic svg{width:18px; height:18px}
+.jrow b{display:block; color:var(--ink); font-family:"Sora",sans-serif; font-weight:600; font-size:.95rem; margin-bottom:2px}
+.jrow span{font-size:.85rem; color:var(--mute)}
+.jseal{display:flex; align-items:flex-start; gap:10px; font-family:"JetBrains Mono",monospace; font-size:.7rem; letter-spacing:.02em; color:var(--ink); background:var(--chip); border:1px solid var(--line-2); border-radius:10px; padding:13px 16px; margin:18px 0 0; line-height:1.65}
+.jseal svg{width:16px; height:16px; flex:none; margin-top:1px; color:var(--ink)}
+.jseal b{font-weight:600}
+.signup{display:flex; gap:10px; flex-wrap:wrap; margin-top:20px; max-width:520px}
+.signup input{flex:1; min-width:220px; padding:14px 16px; border:1px solid var(--line-2); border-radius:6px; font-family:inherit; font-size:.9rem; color:var(--ink); background:#fff}
+.signup input::placeholder{color:var(--dim)}
+.signup input:focus{outline:none; border-color:var(--ink); box-shadow:0 0 0 1px var(--ink)}
+.signup .btn{flex:none}
+.signup-ok{display:none; align-items:center; gap:9px; margin-top:18px; font-family:"Sora",sans-serif; color:var(--ink); font-weight:500}
+.signup-ok svg{color:var(--ink); flex:none}
+.signote{font-family:"JetBrains Mono",monospace; font-size:.64rem; color:var(--dim); letter-spacing:.03em; margin-top:12px}
+
+
+/* exclusivity highlights — inspire the pledge */
+.unlock{background:var(--ink); color:#fff; border-radius:16px; padding:36px 38px; box-shadow:var(--sh-lg); margin-top:34px}
+.unlock .tag{display:inline-flex; align-items:center; gap:7px; font-family:"JetBrains Mono",monospace; font-size:.6rem; letter-spacing:.16em; text-transform:uppercase; color:#fff; border:1px solid rgba(255,255,255,.3); border-radius:30px; padding:5px 12px 5px 10px; margin-bottom:18px}
+.unlock .tag svg{width:12px; height:12px}
+.unlock h3{color:#fff; font-size:1.55rem; margin-bottom:10px}
+.unlock > p{color:rgba(255,255,255,.74); font-size:.96rem; max-width:60ch; margin:0 0 20px}
+.unlock ul{list-style:none; padding:0; margin:0 0 24px; display:grid; grid-template-columns:repeat(2,1fr); gap:11px 28px}
+.unlock li{position:relative; padding-left:24px; font-size:.88rem; color:rgba(255,255,255,.88)}
+.unlock li::before{content:""; position:absolute; left:0; top:6px; width:11px; height:7px; border-left:1.8px solid #fff; border-bottom:1.8px solid #fff; transform:rotate(-45deg)}
+.btn-light{background:#fff; color:var(--ink)}
+.btn-light:hover{background:#e9ecef}
+
+
+/* journey panel -> dark highlight (matches the Backers-only treatment) */
+.journey{background:var(--ink); color:#fff; border:0; box-shadow:var(--sh-lg)}
+.journey .eyebrow{color:rgba(255,255,255,.6)}
+.journey > h3{color:#fff}
+.journey .muted{color:rgba(255,255,255,.74)}
+.journey .jrow .ic{background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.2); color:#fff}
+.journey .jrow b{color:#fff}
+.journey .jrow span{color:rgba(255,255,255,.66)}
+.journey .jseal{background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.22); color:#fff}
+.journey .jseal svg{color:#fff}
+.journey .signup input{background:rgba(255,255,255,.06); border-color:rgba(255,255,255,.28); color:#fff}
+.journey .signup input::placeholder{color:rgba(255,255,255,.45)}
+.journey .signup input:focus{border-color:#fff; box-shadow:0 0 0 1px #fff}
+.journey .signup-ok{color:#fff}
+.journey .signup-ok svg{color:#fff}
+.journey .signote{color:rgba(255,255,255,.5)}
+
+
+/* founder video */
+.vstory{max-width:680px; margin:0 auto 40px; text-align:center}
+.vstory .lead{margin:16px auto 0}
+.video{position:relative; max-width:1000px; margin:0 auto; border-radius:18px; overflow:hidden; aspect-ratio:16/9; background:radial-gradient(120% 130% at 50% 25%, #20242a 0%, #0c0e10 68%); box-shadow:var(--sh-lg); display:flex; align-items:center; justify-content:center; cursor:pointer}
+.video::after{content:""; position:absolute; inset:0; border-radius:18px; box-shadow:inset 0 0 0 1px rgba(255,255,255,.07); pointer-events:none}
+.vplay{width:76px; height:76px; border-radius:50%; background:#fff; border:0; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 14px 44px rgba(0,0,0,.45); transition:transform .2s}
+.video:hover .vplay{transform:scale(1.07)}
+.vplay svg{width:28px; height:28px; color:var(--ink); margin-left:4px}
+.vtag{position:absolute; top:18px; left:18px; display:inline-flex; align-items:center; gap:7px; font-family:"JetBrains Mono",monospace; font-size:.6rem; letter-spacing:.16em; text-transform:uppercase; color:#fff; border:1px solid rgba(255,255,255,.3); border-radius:30px; padding:5px 12px; z-index:2}
+.vtag svg{width:13px; height:13px}
+.vmeta{position:absolute; left:0; right:0; bottom:0; padding:40px 24px 20px; background:linear-gradient(transparent, rgba(0,0,0,.62)); display:flex; justify-content:space-between; align-items:flex-end; gap:16px; pointer-events:none}
+.vmeta .who{color:#fff; font-family:"Sora",sans-serif; font-weight:600; font-size:1rem}
+.vmeta .who span{display:block; font-family:"JetBrains Mono",monospace; font-weight:400; font-size:.6rem; letter-spacing:.1em; color:rgba(255,255,255,.6); margin-top:4px; text-transform:uppercase}
+.vmeta .dur{color:rgba(255,255,255,.78); font-family:"JetBrains Mono",monospace; font-size:.66rem; letter-spacing:.08em; white-space:nowrap}
+.vsoon{position:absolute; inset:0; display:none; align-items:center; justify-content:center; flex-direction:column; gap:10px; text-align:center; padding:26px; background:rgba(8,10,12,.62)}
+.vsoon b{color:#fff; font-family:"Sora",sans-serif; font-size:1.05rem}
+.vsoon span{color:rgba(255,255,255,.72); font-family:"JetBrains Mono",monospace; font-size:.66rem; letter-spacing:.05em; max-width:36ch; line-height:1.6}
+.vstorytext{max-width:720px; margin:40px auto 0}
+.vstorytext .quote{margin-top:24px}
+
+
+/* demo: real video + 360 view */
+.demogrid{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+.democard{position:relative; border:1px solid var(--line); border-radius:16px; overflow:hidden; background:radial-gradient(120% 130% at 50% 22%, #1b1e23 0%, #0b0d0f 72%); box-shadow:var(--sh-sm); min-height:470px; display:flex; align-items:center; justify-content:center}
+.democard video{height:100%; max-height:520px; width:auto; max-width:100%; display:block; background:#000}
+.dtag{position:absolute; top:16px; left:16px; z-index:2; display:inline-flex; align-items:center; gap:7px; font-family:"JetBrains Mono",monospace; font-size:.58rem; letter-spacing:.16em; text-transform:uppercase; color:#fff; border:1px solid rgba(255,255,255,.3); border-radius:30px; padding:5px 11px}
+.dtag svg{width:11px; height:11px}
+.d360{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; text-align:center; padding:30px; color:#fff}
+.d360 .ring{width:78px; height:78px; border-radius:50%; border:1px solid rgba(255,255,255,.3); display:flex; align-items:center; justify-content:center; margin-bottom:2px}
+.d360 .ring svg{width:32px; height:32px; color:#fff}
+.d360 b{font-family:"Sora",sans-serif; font-weight:600; font-size:1.05rem}
+.d360 span{font-family:"JetBrains Mono",monospace; font-size:.64rem; letter-spacing:.05em; color:rgba(255,255,255,.66); max-width:30ch; line-height:1.6}
+.demcap{font-family:"JetBrains Mono",monospace; font-size:.66rem; letter-spacing:.06em; color:var(--mute); text-align:center; margin-top:12px}
+
+
+/* lead product film */
+.demofilm{position:relative; border:1px solid var(--line); border-radius:18px; overflow:hidden; aspect-ratio:16/9; background:#0b0d0f; box-shadow:var(--sh-lg)}
+.demofilm video{width:100%; height:100%; object-fit:cover; display:block}
+
+
+/* app overlay on the product film */
+.demofilm{position:relative}
+.sense{position:absolute; top:16px; right:16px; z-index:3; width:200px; padding:15px 16px 14px; background:rgba(10,12,14,.5); -webkit-backdrop-filter:blur(16px) saturate(1.15); backdrop-filter:blur(16px) saturate(1.15); border:1px solid rgba(255,255,255,.14); border-radius:15px; box-shadow:0 16px 46px rgba(0,0,0,.45); color:#fff; animation:appIn .7s cubic-bezier(.2,.7,.2,1) 1.1s both}
+.sense-hd{display:flex; align-items:center; gap:9px; margin-bottom:13px}
+.sense-hd b{font-family:"JetBrains Mono",monospace; font-size:.56rem; font-weight:500; letter-spacing:.22em; text-transform:uppercase; color:rgba(255,255,255,.55)}
+.radar{position:relative; width:14px; height:14px; display:inline-flex; align-items:center; justify-content:center; flex:none}
+.radar i{width:5px; height:5px; border-radius:50%; background:#fff; z-index:2; font-style:normal}
+.radar::before,.radar::after{content:""; position:absolute; inset:0; border-radius:50%; border:1px solid rgba(255,255,255,.7); animation:ping 2.6s ease-out infinite}
+.radar::after{animation-delay:1.3s}
+@keyframes ping{0%{transform:scale(.35); opacity:.85} 100%{transform:scale(2.4); opacity:0}}
+.sense-main{font-family:"Sora",sans-serif; font-weight:500; font-size:1rem; letter-spacing:-.01em; color:#fff}
+.sense-line{height:1px; background:rgba(255,255,255,.13); margin:13px 0}
+.sense-wt{display:flex; align-items:flex-end; justify-content:space-between}
+.sense-wt .wl{font-family:"JetBrains Mono",monospace; font-size:.56rem; letter-spacing:.22em; text-transform:uppercase; color:rgba(255,255,255,.5)}
+.sense-wt .wv{font-family:"Sora",sans-serif; font-weight:300; font-size:1.5rem; line-height:.9; color:#fff}
+.sense-wt .wv small{font-size:.7rem; font-weight:400; color:rgba(255,255,255,.7); margin-left:3px}
+@media(max-width:600px){.sense{width:152px; top:10px; right:10px; padding:11px 12px}.sense-main{font-size:.86rem}.sense-wt .wv{font-size:1.2rem}}
+@keyframes appIn{from{opacity:0; transform:translateY(-8px) scale(.96)} to{opacity:1; transform:none}}
+.fa-top{display:flex; justify-content:space-between; align-items:center; margin-bottom:9px}
+.fa-top span{font-family:"JetBrains Mono",monospace; font-size:.56rem; letter-spacing:.16em; text-transform:uppercase; color:var(--mute)}
+.fa-live{width:7px; height:7px; border-radius:50%; background:var(--ink); animation:pulse 2.4s infinite}
+.fa-row{display:flex; align-items:center; gap:10px; padding:8px 0; border-top:1px solid var(--line)}
+.fa-row:first-of-type{border-top:0}
+.fa-ic{width:30px; height:30px; border-radius:8px; background:var(--chip); border:1px solid var(--chip-line); display:flex; align-items:center; justify-content:center; color:var(--ink); flex:none}
+.fa-ic svg{width:16px; height:16px}
+.fa-txt b{display:block; font-family:"Sora",sans-serif; font-weight:600; font-size:.82rem; color:var(--blue); line-height:1.15}
+.fa-txt span{font-size:.72rem; color:var(--mute)}
+.demo360solo{min-height:420px}
+@media(max-width:600px){
+  .filmapp{width:150px; top:10px; right:10px; padding:9px 10px}
+  .filmapp .fa-ic{width:24px; height:24px}
+  .filmapp .fa-ic svg{width:13px; height:13px}
+  .fa-txt b{font-size:.7rem}
+  .fa-txt span{font-size:.6rem}
+}
+
+
+/* how the reservation works */
+.rsteps{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:40px}
+.rstep{border:1px solid var(--line); border-radius:13px; background:#fff; padding:24px; box-shadow:var(--sh-sm)}
+.rstep .num{width:30px; height:30px; border-radius:8px; background:var(--ink); color:#fff; display:flex; align-items:center; justify-content:center; font-family:"Sora",sans-serif; font-weight:600; font-size:.85rem; margin-bottom:14px}
+.rstep .when{font-family:"JetBrains Mono",monospace; font-size:.6rem; letter-spacing:.12em; text-transform:uppercase; color:var(--mute); margin-bottom:8px}
+.rstep h3{font-size:1.05rem; color:var(--ink); margin-bottom:6px}
+.rstep p{font-size:.85rem; color:var(--mute); margin:0}
+.ptiers-intro{font-family:"JetBrains Mono",monospace; font-size:.68rem; letter-spacing:.08em; color:var(--mute); text-transform:uppercase; margin:0 0 16px}
+
+/* app mockup in demo slot */
+.appshow{max-width:440px; margin:0 auto}
+
+/* reveal */
+.reveal{opacity:0; transform:translateY(18px); transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1; transform:none}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--ink); outline-offset:3px}
+
+@media(max-width:980px){
+  nav.main,.nav-cta{display:none}
+  .menu-btn{display:inline-flex}
+  header.open .bar{flex-wrap:wrap}
+  header.open nav.main{display:flex; flex-direction:column; gap:4px; width:100%; order:3; margin-top:12px}
+  header.open .nav-cta{display:inline-flex; order:4; margin:10px 0 0}
+  .hero .wrap,.vsplit,.story{grid-template-columns:1fr; gap:36px}
+  .telem .grid,.pgrid,.vgrid,.sgrid,.ptiers,.tgrid{grid-template-columns:repeat(2,1fr)}
+  .inout,.bens,.jgrid,.unlock ul,.demogrid,.rsteps{grid-template-columns:1fr}
+  .tcell:nth-child(3),.tcell:nth-child(4){border-top:1px solid var(--line)}
+  .tcell:nth-child(odd){border-left:0}
+  .osrow{grid-template-columns:auto 1fr; gap:14px}
+  .osrow .ic,.osrow .tm{display:none}
+  .fitgrid{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .telem .grid,.pgrid,.vgrid,.sgrid,.ptiers,.tgrid{grid-template-columns:1fr}
+  .tcell{border-left:0; border-top:1px solid var(--line)}
+  .tcell:first-child{border-top:0}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none !important; scroll-behavior:auto !important}
+  .reveal{opacity:1; transform:none; transition:none}
+}
 </style>
 </head>
 <body>
 
-<div class="ticker"><span class="dot"></span>Pre-launch live — <b id="tk-back">31</b> founders reserved · Kickstarter goes live <b>July 15</b></div>
+<div class="announce"><div class="wrap"><span class="dot"></span>Pre-launch live · <b>31 founders reserved</b> · Kickstarter goes live <b>July 15</b></div></div>
 
 <header>
-  <div class="wrap nav">
-    <div class="logo">SPRATT <span>LABS</span></div>
-    <nav>
-      <a href="#problem">The problem</a>
+  <div class="bar">
+    <a class="brand" href="#top">
+      <span class="logo-mark"><svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-label="Spratt Labs"><rect width="120" height="120" rx="30" fill="#0e1320"/><path d="M53 31 L48 18 L60 27 Z" fill="#ffffff"/><path d="M74 44 C74 32 52 30 44 40 C36 49 50 56 60 60 C70 64 84 71 76 82 C68 92 46 90 40 78" fill="none" stroke="#ffffff" stroke-width="6.5" stroke-linecap="butt" stroke-linejoin="round"/></svg></span>
+      <span class="word">SPRATT&nbsp;LABS</span>
+    </a>
+    <button class="menu-btn">Menu</button>
+    <nav class="main">
+      <a href="#problem">The Problem</a>
       <a href="#os">SprattOS</a>
-      <a href="#value">Value</a>
-      <a href="#fit">Sizes</a>
+      <a href="#safety">Safety</a>
+      <a href="#story">The Story</a>
+      <a href="#team">Team</a>
       <a href="#pledge">Pledge</a>
       <a href="#faq">FAQ</a>
     </nav>
-    <a href="#pledge" class="nav-cta">Reserve your spot</a>
+    <a class="nav-cta" href="#pledge">Reserve · $5</a>
   </div>
 </header>
 
+<main id="top">
+
 <!-- HERO -->
 <section class="hero">
-  <div class="wrap hero-grid">
+  <div class="wrap">
     <div>
-      <a href="#" class="ks-badge" id="ks-hero"><span class="kmark">k</span> Launching on Kickstarter · July 15</a>
-      <div class="eyebrow">Patent-pending platform · SprattOS<span class="tm">™</span></div>
-      <h1>The smart dog bed that <em>clears the air</em>.</h1>
-      <p class="lede">Meet the Spratt Bed<span class="tm">™</span> — powered by SprattOS<span class="tm">™</span>, our intelligent pet-wellness platform. Sensing, directed airflow, purification, deodorizing, fragrance experiences, and full app control, built into one dog bed. You decide every release from your phone.</p>
-      <div class="hero-cta">
-        <button class="btn btn-primary" data-tier="Founder Reservation" data-amount="5" data-founder="1">Reserve a founder spot — $5</button>
-        <a href="#os" class="btn btn-ghost">Explore SprattOS™</a>
+      <p class="eyebrow">The smart dog bed · Powered by SprattOS™</p>
+      <h1>Love your dog.<br><em>Not the smell.</em></h1>
+      <p class="lead">Meet the Spratt Bed™ — a dog bed powered by SprattOS™, with a built-in air purifier and deodorizer. It does three things at once: it purifies the air and dander around the bed, it keeps the bed and your dog smelling fresh, and it releases gentle botanicals chosen to help your dog feel calmer and better. Safe for dogs, cats, and people, and you control all of it from the app.</p>
+      <div class="hbtns" style="margin-top:30px">
+        <a class="btn btn-blue" href="#pledge">Reserve your spot · $5 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-ghost" href="#os">See how SprattOS works</a>
       </div>
       <div class="trust">
-        <span>🔒 <b>Fully refundable</b> deposit</span>
-        <span>🏷️ Locks in <b>40% off</b> retail</span>
-        <span>🇺🇸 Shipping early <b>2027</b></span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><b>Fully refundable</b> deposit</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Locks <b>40% off</b> retail</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Ships <b>early 2027</b></span>
       </div>
     </div>
-    <div class="stage" aria-hidden="true">
-      <svg class="drift-svg" viewBox="0 0 520 440" preserveAspectRatio="none">
-        <path class="drift-path"    d="M-20 120 C 120 70, 260 170, 420 110 S 620 140, 560 120"/>
-        <path class="drift-path d2" d="M-20 180 C 140 230, 280 110, 440 190 S 620 160, 560 180"/>
-        <path class="drift-path d3" d="M-20 240 C 120 200, 300 280, 460 230 S 620 250, 560 240"/>
-      </svg>
-      <div class="halo h1"></div>
-      <div class="halo h2"></div>
-      <div class="chip c1"><i>🌬️</i> AirPure™ active</div>
-      <div class="chip c2"><i>🍃</i> AirMood™ Relax</div>
-      <div class="chip c3"><i>🐾</i> AirSense™ — dog detected</div>
-      <div class="bed"><span class="bed-dog">🐶</span></div>
+
+<div class="demofilm reveal">
+      <span class="dtag"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="5"/></svg>Product film</span>
+      <video src="sprattos-film.mp4" poster="data:image/jpeg;base64,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" autoplay muted loop playsinline controls preload="metadata"></video>
+      <div class="sense">
+        <div class="sense-hd"><span class="radar"><i></i></span><b>Sensing</b></div>
+        <div class="sense-main">Dog detected</div>
+        <div class="sense-line"></div>
+        <div class="sense-wt"><span class="wl">Weight</span><span class="wv">62<small>lb</small></span></div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- FUNDING -->
-<section class="fund">
-  <div class="wrap fund-grid">
-    <div>
-      <div class="label">Pre-launch reservations</div>
-      <div class="raised">$<span id="raised">9,240</span> <small>of $30,000 founder goal</small></div>
-      <div class="bar"><div class="bar-fill" id="barfill"></div></div>
-      <div class="fund-stats">
-        <div><b id="pct">31%</b><span>Funded</span></div>
-        <div><b id="backers">31</b><span>Founders reserved</span></div>
-        <div><b id="spots">19</b><span>Founder spots left</span></div>
-      </div>
-    </div>
-    <div class="countdown">
-      <div class="t">Kickstarter launches in</div>
-      <div class="clock">
-        <div><b id="cd-d">00</b><span>Days</span></div>
-        <div><b id="cd-h">00</b><span>Hrs</span></div>
-        <div><b id="cd-m">00</b><span>Min</span></div>
-        <div><b id="cd-s">00</b><span>Sec</span></div>
-      </div>
-    </div>
+<!-- TELEMETRY -->
+<section class="telem" style="padding:0">
+  <div class="grid">
+    <div class="tcell"><div class="k">Founders reserved</div><div class="v"><span class="bl">31</span> <small>/ 50</small></div></div>
+    <div class="tcell"><div class="k">Founder goal</div><div class="v">$9,240 <small>/ $30k</small></div></div>
+    <div class="tcell"><div class="k">Spots remaining</div><div class="v">19 <small>left</small></div></div>
+    <div class="tcell"><div class="k">Kickstarter launch</div><div class="cd" id="cd"></div></div>
   </div>
 </section>
 
 <!-- PROBLEM -->
-<section class="sec problem" id="problem">
+<section id="problem">
   <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow">The problem</div>
-      <h2>The smell isn't just the dog — it's the bed.</h2>
-      <p>Every dog that goes outside brings odor back into the home — it's normal, and it ends up in their coat and their bed. The Spratt Bed safely handles both at once: no scrubbing, no washing, no spraying, and no physical work from you.</p>
+    <div class="shead reveal">
+      <p class="eyebrow">The Problem</p>
+      <h2>The smell isn't just your dog. It's the bed.</h2>
+      <p class="lead">It's normal — every dog that goes outside carries odor back in, and it settles into their coat and the bed beneath them. Sprays and plug-ins only mask it. The Spratt Bed handles both at the source: no scrubbing, no washing, no spraying your dog, and no work from you.</p>
     </div>
-    <div class="p-grid">
-      <div class="p-card"><div class="ic">🐕</div><h3>Coat odor</h3><p>Dogs hold smell in their fur between baths. Sprays and plug-ins only mask it.</p></div>
-      <div class="p-card"><div class="ic">🌫️</div><h3>Dander &amp; dust</h3><p>The bed becomes a reservoir that stirs into the air every time they move.</p></div>
-      <div class="p-card"><div class="ic">💧</div><h3>Damp &amp; mildew</h3><p>Sprays add moisture. Moisture is exactly what odor and mildew feed on.</p></div>
-      <div class="p-card"><div class="ic">🕯️</div><h3>Heavy fragrance</h3><p>Plug-ins run constantly and overwhelm a sensitive canine nose.</p></div>
+    <div class="pgrid reveal">
+      <div class="pcard"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14c2-1 3-3 3-5M9 16c2-1 3-3 3-6M14 16c2-1 3-3 3-5M19 14c1-.6 1.6-1.8 1.6-3"/><path d="M3 19h18"/></svg></div><h3>Coat odor</h3><p>Dogs hold smell in their fur between baths. Sprays and plug-ins only cover it up.</p></div>
+      <div class="pcard"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="7" r="1"/><circle cx="11" cy="5" r="1"/><circle cx="16" cy="8" r="1"/><circle cx="9" cy="11" r="1"/><circle cx="15" cy="13" r="1"/><circle cx="7" cy="16" r="1"/><circle cx="13" cy="18" r="1"/><circle cx="18" cy="16" r="1"/></svg></div><h3>Dander &amp; dust</h3><p>The bed becomes a reservoir that stirs back into the air every time they move.</p></div>
+      <div class="pcard"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 6.5 6 10.5a6 6 0 0 1-12 0C6 9.5 12 3 12 3z"/><path d="M9 14a3 3 0 0 0 3 3"/></svg></div><h3>Damp &amp; mildew</h3><p>Wet sprays add moisture — exactly what odor and mildew feed on.</p></div>
+      <div class="pcard"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c2 2 2 4 0 5-2-1-2-3 0-5z" fill="currentColor" stroke="none"/><rect x="9" y="9" width="6" height="11" rx="1"/><path d="M3 13c1.5-1 2.5-1 4 0M17 13c1.5-1 2.5-1 4 0"/></svg></div><h3>Heavy fragrance</h3><p>Plug-ins run constantly and overwhelm a sensitive canine nose.</p></div>
     </div>
   </div>
 </section>
 
-<!-- SPRATTOS STACK -->
-<section class="sec os" id="os">
+<!-- SPRATTOS -->
+<section id="os" class="alt">
   <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow">Powered by SprattOS<span class="tm">™</span></div>
-      <h2>One platform. Five intelligent systems.</h2>
-      <p>SprattOS<span class="tm">™</span> is our patent-pending pet-wellness platform. It senses when your dog is resting, manages airflow around the bed, supports purification and deodorizing, and puts every fragrance experience under your control in the Spratt App<span class="tm">™</span>.</p>
+    <div class="shead reveal">
+      <p class="eyebrow">Powered by SprattOS™</p>
+      <h2>One system. Cleaner air, a fresher, calmer dog.</h2>
+      <p class="lead">SprattOS™ is the patent-pending system inside the bed — an air purifier and deodorizer in one. It works three ways at once: it purifies the air and dander around the bed, it keeps the bed and your dog smelling fresh, and the botanicals it releases are chosen to be good for your dog. It senses your dog, tracks their weight, and runs exactly when you tell it to.</p>
     </div>
-    <div class="stack-grid">
-      <div class="sc"><div class="badge">01</div><div class="ic">🐾</div><h3>AirSense<span class="tm">™</span></h3><p>Occupancy sensing that recognizes when your dog settles in. It senses — it does not trigger sprays on its own.</p></div>
-      <div class="sc"><div class="badge">02</div><div class="ic">🌬️</div><h3>AirFlow<span class="tm">™</span></h3><p>Directed airflow designed to move and freshen the air around the bed and your dog's coat.</p></div>
-      <div class="sc"><div class="badge">03</div><div class="ic">✨</div><h3>AirPure<span class="tm">™</span></h3><p>Purification and deodorizing support that clears odor at the source — fragrance-free if you prefer.</p></div>
-      <div class="sc"><div class="badge">04</div><div class="ic">🍃</div><h3>AirMood<span class="tm">™</span></h3><p>Purpose-driven fragrance cartridges — Relax, Fresh, and Comfort — engineered and confirmed pet-safe.</p></div>
-      <div class="sc"><div class="badge">05</div><div class="ic">📱</div><h3>Spratt App<span class="tm">™</span></h3><p>Mobile control over frequency, schedule, intensity, cartridge status, and a manual boost. You command every release.</p></div>
+
+    <div class="callout reveal">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4.2 2.9 7.9 7 9 4.1-1.1 7-4.8 7-9V6z"/></svg></div>
+      <div><b>It knows when your dog is there. It only runs when you say so.</b>
+      <p>The bed senses when your dog gets in — but it never sprays on its own. You decide when it runs: on a schedule, only while your dog's away, or a set time after they get in. On demand or paused, any time.</p></div>
     </div>
-    <div class="roadmap">
-      <div class="rb">📈</div>
-      <div>
-        <h3>AirSense™ grows with your dog <span class="tag">On the roadmap</span></h3>
-        <p>Freshening is just the start. The same sensing layer is built to power weight monitoring and health insights through future SprattOS™ updates — so the Spratt Bed gets more useful over time, not less.</p>
-      </div>
+
+    <div class="oslist reveal">
+      <div class="osrow"><div class="n">01</div><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="11" r="1.6"/><circle cx="10" cy="8" r="1.6"/><circle cx="14" cy="8" r="1.6"/><circle cx="18" cy="11" r="1.6"/><path d="M8 16.5c0-2 1.8-3.5 4-3.5s4 1.5 4 3.5-1.8 3-4 3-4-1-4-3z"/></svg></div><div class="body"><h3>Senses your dog</h3><p>Sensors in the bed detect when your dog gets in, when they leave, and what they weigh over time. Detection only — it informs the system, but never starts a release on its own.</p></div><div class="tm">Sensing</div></div>
+      <div class="osrow"><div class="n">02</div><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h11a2.5 2.5 0 1 0-2.5-2.5"/><path d="M3 12h15a2.5 2.5 0 1 1-2.5 2.5"/><path d="M3 16h9a2 2 0 1 1-2 2"/></svg></div><div class="body"><h3>Cleaner air, a fresher and calmer dog</h3><p>Three things at once: it purifies the air and dander around the bed; it deodorizes the bed and your dog so both stay fresh between baths; and the botanicals it releases are chosen to benefit your dog — gentle, calming, soothing. Water-based, and fragrance-free if you prefer.</p></div><div class="tm">Air &amp; wellness</div></div>
+      <div class="osrow"><div class="n">03</div><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3" width="10" height="18" rx="2.5"/><path d="M11 18h2"/></svg></div><div class="body"><h3>You're in control</h3><p>One simple app: check the cartridge level, see your dog's weight, and set exactly when it runs — by time, by day, or a custom rule.</p></div><div class="tm">The app</div></div>
+    </div>
+
+    <div class="roadmap reveal">
+      <span class="tag">On the roadmap</span>
+      <p><b>It gets smarter over time.</b> Because the bed already senses your dog and tracks their weight, future SprattOS™ updates can add more health insights — no new hardware required. The bed gets more useful, not obsolete.</p>
     </div>
   </div>
 </section>
 
-<!-- BRAND ARCHITECTURE -->
-<section class="sec arch" id="platform">
-  <div class="wrap arch-grid">
-    <div>
-      <div class="eyebrow">Brand architecture</div>
-      <h2>One brand. One platform. Many future products.</h2>
-      <p class="ap">Spratt Labs isn't just building a dog bed — we're building the technology platform for intelligent pet wellness. The Spratt Bed is the first product. SprattOS<span class="tm">™</span> is the platform underneath it, ready to power smart crates, air-care devices, feeders, and more.</p>
-    </div>
-    <div class="arch-box">
-      <div class="r"><strong>Company</strong><span>Spratt Labs™</span></div>
-      <div class="r"><strong>Product</strong><span>Spratt Bed™</span></div>
-      <div class="r"><strong>Platform</strong><span>SprattOS™</span></div>
-      <div class="r"><strong>Sensing</strong><span>AirSense™</span></div>
-      <div class="r"><strong>Air care</strong><span>AirFlow™ + AirPure™</span></div>
-      <div class="r"><strong>Experience</strong><span>AirMood™ Pods</span></div>
-      <div class="r"><strong>Control</strong><span>Spratt App™</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- APP -->
-<section class="sec app" id="app">
+<!-- DEMO -->
+<section id="demo">
   <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow">Spratt App<span class="tm">™</span></div>
-      <h2>Every setting in your pocket.</h2>
-      <p>The Spratt App pairs over Bluetooth and gives you full, gentle control of SprattOS™ — without ever overwhelming your dog's nose.</p>
+    <div class="vstory reveal">
+      <p class="eyebrow">Simple to control</p>
+      <h2>One simple app. A full look at the bed.</h2>
+      <p class="lead">Everything runs from one app &mdash; check the cartridge, your dog's weight, and exactly when it runs. Then see the bed itself from every angle.</p>
     </div>
-    <div class="app-grid">
-      <div class="phone">
-        <div class="scr">
-          <div class="now">Spratt App · Living Room</div>
-          <div class="mode">AirMood™ Relax</div>
-          <div class="ring"><div><b>68%</b><span>Cartridge</span></div></div>
-          <div class="scent">
-            <span class="on">Relax</span>
-            <span>Fresh</span>
-            <span>Comfort</span>
-          </div>
+
+    <div class="appshow">
+<div class="console reveal">
+      <div class="chead"><span class="t">SprattOS · Living Room</span><span class="live"><i></i>Live</span></div>
+      <div class="crow"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="11" r="1.6"/><circle cx="10" cy="8" r="1.6"/><circle cx="14" cy="8" r="1.6"/><circle cx="18" cy="11" r="1.6"/><path d="M8 16.5c0-2 1.8-3.5 4-3.5s4 1.5 4 3.5-1.8 3-4 3-4-1-4-3z"/></svg></div><div class="lbl"><b>Bed sensor</b><span>Dog detected · 2 min</span></div><div class="st"><i></i>Live</div></div>
+      <div class="crow"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v15"/><path d="M7 19h10"/><path d="M6 8h12"/><path d="M6 8 3.5 13.5a2.5 2.5 0 0 0 5 0z"/><path d="M18 8l-2.5 5.5a2.5 2.5 0 0 0 5 0z"/></svg></div><div class="lbl"><b>Dog's weight</b><span>62 lb · steady</span></div><div class="st"><i></i>Tracked</div></div>
+      <div class="crow"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></div><div class="lbl"><b>Purify &amp; deodorize</b><span>Daily · 9:00 AM, 6:00 PM</span></div><div class="st"><i></i>Scheduled</div></div>
+      <div class="cmeter"><div class="top"><span>Cartridge level</span><b>68% remaining</b></div><div class="track"><i></i></div></div>
+    </div>
+    </div>
+    <p class="demcap reveal">The SprattOS app &mdash; simple by design</p>
+
+    <div class="demo360wrap reveal" style="margin-top:34px">
+      <div class="democard demo360solo">
+        <span class="dtag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8c5 0 9 1.8 9 4s-4 4-9 4-9-1.8-9-4 4-4 9-4z"/></svg>360&deg; view</span>
+        <div class="d360">
+          <span class="ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v4h-4"/></svg></span>
+          <b>Spin the Spratt Bed</b>
+          <span>A full 360&deg; view of the bed is coming &mdash; drag to explore it from every angle.</span>
         </div>
       </div>
-      <div class="feat">
-        <div class="row"><div class="ic">🎚️</div><div><h3>Frequency &amp; intensity</h3><p>Set how often and how strong each release is. You cap the ceiling, so it's never too much for sensitive noses.</p></div></div>
-        <div class="row"><div class="ic">⏰</div><div><h3>Schedules &amp; manual boost</h3><p>Build schedules for nap windows or overnight, or hit manual boost on demand. The bed only diffuses when you tell it to.</p></div></div>
-        <div class="row"><div class="ic">🍃</div><div><h3>AirMood™ library</h3><p>Switch between Relax, Fresh, and Comfort cartridges, with seasonal AirMood™ Pods on the way.</p></div></div>
-        <div class="row"><div class="ic">🔔</div><div><h3>Cartridge status</h3><p>Track cartridge life in real time and get a reminder before one runs out, so the bed is always ready.</p></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SCENTS -->
-<section class="sec scents-sec" id="scents">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow">Inside AirMood<span class="tm">™</span></div>
-      <h2>Engineered scents. Safe for the whole household.</h2>
-      <p>Every AirMood<span class="tm">™</span> cartridge was developed and tested by chemical engineers — chosen for effectiveness against odor and confirmed safe for families, dogs, and other pets, including cats. The exact blend is our edge, so we're keeping it sealed.</p>
-    </div>
-    <div class="scents-grid">
-      <div class="scent-points">
-        <div class="row"><div class="ic">🧪</div><div><h3>Developed by chemical engineers</h3><p>Not off-the-shelf fragrance. Each oil was formulated and validated for performance and safety, not just smell.</p></div></div>
-        <div class="row"><div class="ic">🐱</div><div><h3>Confirmed safe for cats</h3><p>Many home scents aren't. AirMood™ blends were specifically vetted to be safe around cats and other pets sharing the space.</p></div></div>
-        <div class="row"><div class="ic">👨‍👩‍👧</div><div><h3>Family-friendly</h3><p>Tuned to be gentle for kids and sensitive noses, with intensity you cap in the Spratt App™ — never overpowering.</p></div></div>
-        <div class="row"><div class="ic">🎯</div><div><h3>Purpose-built blends</h3><p>Relax, Fresh, and Comfort — each engineered for a job, not just a pleasant top note. Prefer none? AirPure™ deodorizes fragrance-free.</p></div></div>
-      </div>
-      <div class="vault">
-        <div class="lock">🔒 Formula sealed</div>
-        <h3>Our blend stays secret — until you're in.</h3>
-        <p>We're not publishing the exact oils inside AirMood™. Founders and pledgers get the full ingredient breakdown and the science behind each cartridge before anyone else.</p>
-        <div class="pods">
-          <div class="pod"><div class="swatch" style="background:rgba(46,125,255,.2);color:var(--drift-2)">🍃</div><div class="pi"><b>AirMood™ Relax</b><span>Engineered calm blend</span></div><div class="blur">▒▒▒▒▒▒</div></div>
-          <div class="pod"><div class="swatch" style="background:rgba(54,209,122,.2);color:#36d17a">🌿</div><div class="pi"><b>AirMood™ Fresh</b><span>Active odor-neutralizing blend</span></div><div class="blur">▒▒▒▒▒▒</div></div>
-          <div class="pod"><div class="swatch" style="background:rgba(255,145,54,.2);color:#ffb066">☁️</div><div class="pi"><b>AirMood™ Comfort</b><span>Soft, cozy everyday blend</span></div><div class="blur">▒▒▒▒▒▒</div></div>
-        </div>
-        <div class="note">🔓 Full ingredient list unlocked the moment you reserve.</div>
-      </div>
+      <p class="demcap">360&deg; product view &middot; coming soon</p>
     </div>
   </div>
 </section>
 
 <!-- VALUE -->
-<section class="sec value" id="value">
+<section id="value">
   <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow">Why it pays off</div>
-      <h2>Fresher dog, fewer chores, real savings.</h2>
-      <p>The Spratt Bed works in the background so you do less — less washing, less grooming spend, and a more comfortable spot your dog actually wants to use.</p>
+    <div class="shead reveal">
+      <p class="eyebrow">Why it pays off</p>
+      <h2>A fresher dog. Fewer chores. Real savings.</h2>
+      <p class="lead">The Spratt Bed works in the background so you do less — less washing, less grooming spend, and a more comfortable spot your dog actually wants to use.</p>
     </div>
-    <div class="p-grid">
-      <div class="p-card"><div class="ic">⏱️</div><h3>Saves your time</h3><p>It keeps the bed and your dog fresh on its own, so freshening isn't another chore on your list.</p></div>
-      <div class="p-card"><div class="ic">💸</div><h3>Spend less on grooming</h3><p>Stretch the time between groom and bath appointments — those add up fast over a year.</p></div>
-      <div class="p-card"><div class="ic">🧺</div><h3>Wash the bed less</h3><p>Odor is managed at the source, so you're not stripping and laundering the bed nearly as often.</p></div>
-      <div class="p-card"><div class="ic">🛋️</div><h3>Premium, comfy fabric</h3><p>Built with a soft, durable, easy-care cover your dog will actually settle into — sized for medium and large dogs.</p></div>
+    <div class="vgrid reveal">
+      <div class="vcard"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></div><h3>Saves your time</h3><p>It keeps the bed and your dog fresh on its own, so freshening isn't another chore on your list.</p></div>
+      <div class="vcard"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M7 9v6M17 9v6"/></svg></div><h3>Spend less on grooming</h3><p>Stretch the time between groom and bath appointments — those add up fast over a year.</p></div>
+      <div class="vcard"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9h14l-1.4 9.2a1.5 1.5 0 0 1-1.5 1.3H7.9a1.5 1.5 0 0 1-1.5-1.3z"/><path d="m9 9 3-5 3 5"/><path d="M10 13v3M14 13v3"/></svg></div><h3>Wash the bed less</h3><p>Odor is managed at the source, so you're not stripping and laundering the bed nearly as often.</p></div>
+      <div class="vcard"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11V8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3"/><path d="M3 11a2 2 0 0 1 4 0v2h10v-2a2 2 0 0 1 4 0v5H3z"/><path d="M6 18v2M18 18v2"/></svg></div><h3>Premium, comfy fabric</h3><p>A soft, durable, easy-care cover your dog will actually settle into — sized for medium and large dogs.</p></div>
+    </div>
+    <div class="vsplit">
+      <div class="reveal">
+        <p class="eyebrow">The best part</p>
+        <h2 style="font-size:clamp(1.7rem,3vw,2.4rem)">It's the bed itself.</h2>
+        <p class="muted" style="margin-top:14px">SprattOS™ does the freshening, but your dog just feels a premium, supportive cushion wrapped in a soft, durable cover. Designed first and foremost to be the most comfortable bed in the house — so the technology disappears and the comfort is all that's left.</p>
+      </div>
+      <div class="panel reveal"><svg class="lines" viewBox="0 0 400 300" preserveAspectRatio="none"><path d="M0 90 C120 70 280 110 400 80" stroke="#101214" stroke-width="1" fill="none" opacity=".5"/><path d="M0 130 C120 112 280 150 400 122" stroke="#6b6f75" stroke-width="1" fill="none" opacity=".4"/><path d="M0 170 C120 154 280 190 400 164" stroke="#101214" stroke-width="1" fill="none" opacity=".25"/></svg><span class="meta">VISUAL — dog settling into the Spratt Bed, cool studio light, faint airflow over the coat</span></div>
     </div>
   </div>
 </section>
 
-<!-- SIZE GUIDE -->
-<section class="sec fit" id="fit">
+<!-- STORY -->
+<section id="story">
   <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow">Find your fit</div>
+    <div class="vstory reveal">
+      <p class="eyebrow">From the founder</p>
+      <h2>Why Spratt Labs exists</h2>
+      <p class="lead">The short version is written below — but it's better to hear it from the person who started it. Here's the beginning of Spratt Labs, in my own words.</p>
+    </div>
+
+    <div class="video reveal">
+      <span class="vtag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="m16 10 5-3v10l-5-3z"/></svg>From the founder</span>
+      <button class="vplay" aria-label="Play the founder video"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+      <div class="vsoon"><b>Founder video coming soon</b><span>Harold is filming the story behind Spratt Labs — it'll play right here.</span></div>
+      <div class="vmeta"><div class="who">Harold Gaines<span>Founder &amp; CEO, Spratt Labs</span></div><div class="dur">The beginning · ~2 min</div></div>
+    </div>
+
+    <div class="vstorytext reveal">
+      <p class="muted">It started with my own dog. Every time he came back from a run or the yard, he brought the smell home with him — into the house, and into his own bed. Keeping up meant spraying him down constantly or booking grooming so often it got expensive fast, and neither actually kept things fresh for long.</p>
+      <p class="muted">So I started Spratt Labs to fix it properly: a bed that purifies the air around your dog, keeps the bed and your dog fresh, and uses gentle, safe ingredients that are actually good for them. That's SprattOS™ — and the Spratt Bed is the first thing we've built with it. Backing the pre-launch puts you in the room for the part I care about most: getting every detail right before we make thousands of them.</p>
+      <div class="quote">
+        <p>"I didn't want to mask the smell. I wanted my dog to be fresher, calmer, and better — in a bed that was better to begin with."</p>
+        <div class="who"><b>Harold Gaines</b> · Founder, Spratt Labs</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SAFETY -->
+<section id="safety" class="alt">
+  <div class="wrap">
+    <div class="shead reveal">
+      <p class="eyebrow">Health &amp; safety first</p>
+      <h2>The tech is smart. What goes in the air is safer.</h2>
+      <p class="lead">Before we designed a single feature, our chemical engineers spent months on two questions: how do you clear the air around a dog without anything that could harm them — and can the same ingredients actually do your dog some good? The answers shaped every choice we made: the way it diffuses, what goes in each fragrance, and everything we deliberately left out.</p>
+    </div>
+    <div class="sgrid reveal">
+      <div class="scard"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h11a2.5 2.5 0 1 0-2.5-2.5"/><path d="M3 12h15a2.5 2.5 0 1 1-2.5 2.5"/><path d="M3 16h9a2 2 0 1 1-2 2"/></svg></div><h3>Dry diffusion, no wet mist</h3><p>A dry, cold-air style dispersion instead of a wet ultrasonic mister — so there's no added humidity, nothing soaking the bed, and no sticky residue on your floors.</p></div>
+      <div class="scard"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19C5 11 11 5 19 5c0 8-6 14-14 14z"/><path d="M5 19c4-4 7-6 11-7"/></svg></div><h3>Water-based, not concentrated oils</h3><p>Our engineers ruled out concentrated essential oils early — they can be hard on a dog's liver and airways. The fragrance is built on gentle, water-based plant botanicals instead.</p></div>
+      <div class="scard"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9 4 4l4 3a8 8 0 0 1 8 0l4-3-1 5"/><path d="M4 9v4a8 8 0 0 0 16 0V9"/><path d="M9 13h.01M15 13h.01"/></svg></div><h3>Safe for cats, too</h3><p>Many home scents that are fine for dogs are toxic to cats. Every material is screened so the same air is safe for the whole household — cats included.</p></div>
+      <div class="scard"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4.2 2.9 7.9 7 9 4.1-1.1 7-4.8 7-9V6z"/><path d="m9 12 2 2 4-4"/></svg></div><h3>None of the bad stuff</h3><p>No phthalates, no hormone disruptors, no added VOCs, and no synthetic &ldquo;fragrance&rdquo; — the ingredients most often tied to headaches and breathing irritation.</p></div>
+    </div>
+
+    <div class="inout reveal">
+      <div class="iocol">
+        <h3><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span>What we use</h3>
+        <ul class="iolist use">
+          <li>A distilled, purified water base</li>
+          <li>Gentle, plant-derived botanical hydrosols</li>
+          <li>Pet-screened, skin-safe solubilizers</li>
+          <li>Dry, residue-free dispersion</li>
+        </ul>
+      </div>
+      <div class="iocol">
+        <h3><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span>What we leave out</h3>
+        <ul class="iolist lose">
+          <li>Concentrated essential oils</li>
+          <li>Phthalates &amp; hormone disruptors</li>
+          <li>Added VOCs &amp; artificial fragrance</li>
+          <li>Added heat &amp; heavy moisture</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bens reveal">
+      <div class="ben"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4.2 2.9 7.9 7 9 4.1-1.1 7-4.8 7-9V6z"/><path d="m9 12 2 2 4-4"/></svg></div><h3>Cleans the air, not just covers it</h3><p>Like a purifier built into the bed, it lifts odor and dander at the source &mdash; instead of hiding them under a heavier scent.</p></div>
+      <div class="ben"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19C5 11 11 5 19 5c0 8-6 14-14 14z"/><path d="M5 19c4-4 7-6 11-7"/></svg></div><h3>Botanicals with a purpose</h3><p>Our fragrances lean on gentle plants like chamomile, long valued for its calming qualities &mdash; chosen for what they do for your dog, and they keep your dog smelling great while they do it.</p></div>
+      <div class="ben"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h16M4 16h16"/><circle cx="9" cy="8" r="2.4" fill="#fff"/><circle cx="15" cy="16" r="2.4" fill="#fff"/></svg></div><h3>You set the intensity</h3><p>Light by default, fully adjustable, and pausable any time from the app.</p></div>
+    </div>
+
+    <div class="unlock reveal">
+      <span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Backers only</span>
+      <h3>Our premium fragrances stay private &mdash; until you're in.</h3>
+      <p>Our fragrance options &mdash; and exactly what goes into them &mdash; stay under wraps for now. Pledge to join the journey, and you get the inside track all the way to launch:</p>
+      <ul>
+        <li>Every fragrance we use &mdash; and why it's safe</li>
+        <li>The benefit behind each one</li>
+        <li>Our full safety testing and results</li>
+        <li>New fragrances as we release them, first</li>
+      </ul>
+      <a class="btn btn-light" href="#pledge">Join the journey &mdash; pledge to unlock <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+
+    <p class="devnote reveal">Formulations are being finalized in our current engineering phase and validated before production. Ingredient specifications and safety data are subject to change and shared in full with backers.</p>
+  </div>
+</section>
+
+<!-- SIZES -->
+<section id="fit">
+  <div class="wrap">
+    <div class="shead reveal">
+      <p class="eyebrow">Find your fit</p>
       <h2>Built for medium &amp; large dogs.</h2>
-      <p>Two sizes, both running the full SprattOS<span class="tm">™</span> system. Measure your dog's shoulder height to pick the right bed.</p>
+      <p class="lead">Two sizes, both running the full SprattOS™ system. Measure your dog's shoulder height to pick the right bed.</p>
     </div>
-    <div class="fit-grid">
-
-      <div class="fit-card">
-        <div class="scene">
-          <svg viewBox="0 0 340 250" role="img" aria-label="Medium bed size diagram: fits dogs up to about 20 inches at the shoulder, bed 30 inches long.">
-            <!-- ground -->
-            <line x1="20" y1="205" x2="320" y2="205" stroke="#cdd9e8" stroke-width="2"/>
-            <!-- ruler -->
-            <line x1="44" y1="205" x2="44" y2="22" stroke="#0A1B33" stroke-width="2"/>
-            <g font-family="Inter,Arial" font-size="10" fill="#5C6B82" text-anchor="end">
-              <line x1="38" y1="205" x2="50" y2="205" stroke="#0A1B33" stroke-width="1.5"/><text x="34" y="209">0</text>
-              <line x1="38" y1="170" x2="50" y2="170" stroke="#9fb2c9" stroke-width="1"/><text x="34" y="174">5</text>
-              <line x1="38" y1="135" x2="50" y2="135" stroke="#0A1B33" stroke-width="1.5"/><text x="34" y="139">10</text>
-              <line x1="38" y1="100" x2="50" y2="100" stroke="#9fb2c9" stroke-width="1"/><text x="34" y="104">15</text>
-              <line x1="38" y1="65"  x2="50" y2="65"  stroke="#0A1B33" stroke-width="1.5"/><text x="34" y="69">20</text>
-              <line x1="38" y1="30"  x2="50" y2="30"  stroke="#9fb2c9" stroke-width="1"/><text x="34" y="34">25</text>
-              <text x="50" y="16" text-anchor="start" fill="#9fb2c9">in</text>
-            </g>
-            <!-- height dimension to ~18in -->
-            <line x1="72" y1="205" x2="72" y2="79" stroke="#FF9136" stroke-width="2"/>
-            <line x1="68" y1="205" x2="76" y2="205" stroke="#FF9136" stroke-width="2"/>
-            <line x1="68" y1="79"  x2="76" y2="79"  stroke="#FF9136" stroke-width="2"/>
-            <text x="82" y="138" font-family="Inter,Arial" font-size="12" font-weight="700" fill="#F0721A">up to ~20 in</text>
-            <!-- bed -->
-            <rect x="140" y="186" width="120" height="20" rx="9" fill="#2E7DFF"/>
-            <rect x="150" y="182" width="100" height="9" rx="5" fill="#5BA3FF"/>
-            <!-- dog -->
-            <text x="202" y="194" font-size="56" text-anchor="middle">🐕</text>
-            <!-- bed length dim -->
-            <line x1="140" y1="222" x2="260" y2="222" stroke="#9fb2c9" stroke-width="1.5"/>
-            <line x1="140" y1="217" x2="140" y2="227" stroke="#9fb2c9" stroke-width="1.5"/>
-            <line x1="260" y1="217" x2="260" y2="227" stroke="#9fb2c9" stroke-width="1.5"/>
-            <text x="200" y="240" font-family="Inter,Arial" font-size="12" font-weight="700" fill="#5C6B82" text-anchor="middle">30 in</text>
-          </svg>
-        </div>
-        <div class="ft">Medium</div>
-        <div class="fsub">For most everyday dogs and growing pups.</div>
-        <ul class="fit-specs">
-          <li><span>Bed size</span><b>30 × 24 in</b></li>
-          <li><span>Fits dogs</span><b>25–50 lb</b></li>
-          <li><span>Shoulder height</span><b>up to ~20 in</b></li>
-        </ul>
+    <div class="fitgrid reveal">
+      <div class="fit">
+        <div class="top"><h3>Medium</h3><span class="sz">30 × 24 in</span></div>
+        <p>For most everyday dogs and growing pups.</p>
+        <div class="spec"><span>Fits dogs</span><b>25–50 lb</b></div>
+        <div class="spec"><span>Shoulder height</span><b>up to ~20 in</b></div>
+        <div class="spec"><span>SprattOS™</span><b>Full system</b></div>
       </div>
-
-      <div class="fit-card">
-        <div class="scene">
-          <svg viewBox="0 0 340 250" role="img" aria-label="Large bed size diagram: fits dogs up to about 27 inches at the shoulder, bed 42 inches long.">
-            <line x1="20" y1="205" x2="320" y2="205" stroke="#cdd9e8" stroke-width="2"/>
-            <line x1="44" y1="205" x2="44" y2="22" stroke="#0A1B33" stroke-width="2"/>
-            <g font-family="Inter,Arial" font-size="10" fill="#5C6B82" text-anchor="end">
-              <line x1="38" y1="205" x2="50" y2="205" stroke="#0A1B33" stroke-width="1.5"/><text x="34" y="209">0</text>
-              <line x1="38" y1="170" x2="50" y2="170" stroke="#9fb2c9" stroke-width="1"/><text x="34" y="174">5</text>
-              <line x1="38" y1="135" x2="50" y2="135" stroke="#0A1B33" stroke-width="1.5"/><text x="34" y="139">10</text>
-              <line x1="38" y1="100" x2="50" y2="100" stroke="#9fb2c9" stroke-width="1"/><text x="34" y="104">15</text>
-              <line x1="38" y1="65"  x2="50" y2="65"  stroke="#0A1B33" stroke-width="1.5"/><text x="34" y="69">20</text>
-              <line x1="38" y1="30"  x2="50" y2="30"  stroke="#9fb2c9" stroke-width="1"/><text x="34" y="34">25</text>
-              <text x="50" y="16" text-anchor="start" fill="#9fb2c9">in</text>
-            </g>
-            <!-- height dimension to ~26in -->
-            <line x1="72" y1="205" x2="72" y2="23" stroke="#FF9136" stroke-width="2"/>
-            <line x1="68" y1="205" x2="76" y2="205" stroke="#FF9136" stroke-width="2"/>
-            <line x1="68" y1="23"  x2="76" y2="23"  stroke="#FF9136" stroke-width="2"/>
-            <text x="82" y="115" font-family="Inter,Arial" font-size="12" font-weight="700" fill="#F0721A">up to ~27 in</text>
-            <!-- bed -->
-            <rect x="116" y="186" width="168" height="20" rx="9" fill="#2E7DFF"/>
-            <rect x="128" y="182" width="144" height="9" rx="5" fill="#5BA3FF"/>
-            <!-- dog -->
-            <text x="202" y="196" font-size="82" text-anchor="middle">🐕</text>
-            <!-- bed length dim -->
-            <line x1="116" y1="222" x2="284" y2="222" stroke="#9fb2c9" stroke-width="1.5"/>
-            <line x1="116" y1="217" x2="116" y2="227" stroke="#9fb2c9" stroke-width="1.5"/>
-            <line x1="284" y1="217" x2="284" y2="227" stroke="#9fb2c9" stroke-width="1.5"/>
-            <text x="200" y="240" font-family="Inter,Arial" font-size="12" font-weight="700" fill="#5C6B82" text-anchor="middle">42 in</text>
-          </svg>
-        </div>
-        <div class="ft">Large</div>
-        <div class="fsub">For big breeds that need room to stretch out.</div>
-        <ul class="fit-specs">
-          <li><span>Bed size</span><b>42 × 30 in</b></li>
-          <li><span>Fits dogs</span><b>50–90 lb</b></li>
-          <li><span>Shoulder height</span><b>up to ~27 in</b></li>
-        </ul>
-      </div>
-
-    </div>
-
-    <div class="fabric">
-      <div class="fic">🛋️</div>
-      <div>
-        <h3>The best part is the bed itself.</h3>
-        <p>SprattOS™ does the freshening, but your dog just feels a premium, supportive cushion wrapped in a soft, durable, easy-care cover. Designed first and foremost to be the most comfortable bed in the house — for medium and large dogs alike.</p>
+      <div class="fit">
+        <div class="top"><h3>Large</h3><span class="sz">42 × 30 in</span></div>
+        <p>For big breeds that need room to stretch out.</p>
+        <div class="spec"><span>Fits dogs</span><b>50–90 lb</b></div>
+        <div class="spec"><span>Shoulder height</span><b>up to ~27 in</b></div>
+        <div class="spec"><span>SprattOS™</span><b>Full system</b></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- PLEDGE -->
-<section class="sec pledge" id="pledge">
+<section id="pledge" class="alt">
   <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow">Back the launch</div>
+    <div class="shead reveal">
+      <p class="eyebrow">Back the launch</p>
       <h2>Reserve now, save the most.</h2>
-      <p>A small refundable deposit today locks in your founder pricing and your place in the first production run of the Spratt Bed<span class="tm">™</span>. You're only charged in full when the Kickstarter campaign goes live.</p>
+      <p class="lead">Reserve your spot now with a small, fully refundable $5 deposit. It locks today's founder pricing — up to 40% off — and your place in the first production run. You are not charged for a bed until you complete your pledge when the Kickstarter opens on July 15.</p>
     </div>
-    <div class="tier-grid">
-      <div class="tier">
-        <div class="tname">Founder Reservation</div>
+    <div class="rsteps reveal">
+      <div class="rstep"><div class="num">1</div><div class="when">Today · $5, refundable</div><h3>Reserve your spot</h3><p>Your $5 deposit holds your founder spot and locks up to 40% off. It's fully refundable, and you're not charged for a bed yet.</p></div>
+      <div class="rstep"><div class="num">2</div><div class="when">July 15 · Kickstarter opens</div><h3>Claim your bed</h3><p>When the campaign goes live, you're notified first. Complete your pledge to get your Spratt Bed™ at the locked founder price.</p></div>
+      <div class="rstep"><div class="num">3</div><div class="when">Through to early 2027</div><h3>We build &amp; ship</h3><p>Founders are first in the production run — with email updates on fragrances, app features, and progress the whole way to delivery.</p></div>
+    </div>
+    <p class="ptiers-intro reveal">The founder pledges you'll choose from when the Kickstarter opens</p>
+    <div class="ptiers reveal">
+      <div class="tier feat">
+        <div class="badge">Start here</div>
+        <h3>Founder Reservation</h3>
         <div class="price">$5</div>
-        <div class="save">Refundable · locks 40% off</div>
-        <ul>
-          <li>Hold your founder pricing</li>
-          <li>First access when we launch</li>
-          <li>Founder updates &amp; input</li>
-          <li>Fully refundable any time</li>
-        </ul>
-        <button class="pbtn" data-tier="Founder Reservation" data-amount="5" data-founder="1">Reserve for $5</button>
-        <div class="left"><span id="left-founder">19</span> of 50 spots left</div>
-      </div>
-      <div class="tier feature">
-        <div class="flag">Best value</div>
-        <div class="tname">Early Bird</div>
-        <div class="price">$149 <s>$249</s></div>
-        <div class="save">Save $100 · ships first</div>
-        <ul>
-          <li>1 Spratt Bed™ with SprattOS™</li>
-          <li>Starter AirMood™ pack (3)</li>
-          <li>Full Spratt App™ access</li>
-          <li>Priority first-run shipping</li>
-        </ul>
-        <button class="pbtn" data-tier="Early Bird" data-amount="149">Pledge $149</button>
-        <div class="left">Most popular tier</div>
+        <div class="sub">$5 deposit · refundable · locks 40% off</div>
+        <ul><li>Reserves your founder spot &mdash; not the bed yet</li><li>Locks up to 40% off for launch day</li><li>First to claim your bed when Kickstarter opens</li><li>Founder updates &amp; fully refundable</li></ul>
+        <a class="btn btn-blue" href="#reserve">Reserve your spot · $5</a>
+        <div class="note">19 of 50 spots left</div>
       </div>
       <div class="tier">
-        <div class="tname">Double Pack</div>
-        <div class="price">$279 <s>$498</s></div>
-        <div class="save">Save $219 · two beds</div>
-        <ul>
-          <li>2 Spratt Beds™</li>
-          <li>6 AirMood™ cartridges</li>
-          <li>Full app access on both</li>
-          <li>Priority shipping</li>
-        </ul>
-        <button class="pbtn" data-tier="Double Pack" data-amount="279">Pledge $279</button>
-        <div class="left">Great for two-dog homes</div>
+        <div class="badge">Best value · ships first</div>
+        <h3>Early Bird</h3>
+        <div class="price">$149<s>$249</s></div>
+        <div class="sub">Save $100</div>
+        <ul><li>1 Spratt Bed™ with SprattOS™</li><li>Starter scent cartridges (3)</li><li>Full app access</li><li>Priority first-run shipping</li></ul>
+        <a class="btn btn-ghost" href="#reserve">Pledge $149</a>
+        <div class="note">Most popular tier</div>
       </div>
       <div class="tier">
-        <div class="tname">Pack Leader</div>
+        <div class="badge">Two-dog homes</div>
+        <h3>Double Pack</h3>
+        <div class="price">$279<s>$498</s></div>
+        <div class="sub">Save $219</div>
+        <ul><li>2 Spratt Beds™</li><li>6 scent cartridges</li><li>Full app access on both</li><li>Priority shipping</li></ul>
+        <a class="btn btn-ghost" href="#reserve">Pledge $279</a>
+        <div class="note">Great for two-dog homes</div>
+      </div>
+      <div class="tier">
+        <div class="badge">Limited · 25 backers</div>
+        <h3>Pack Leader</h3>
         <div class="price">$399</div>
-        <div class="save">Lifetime AirMood™ supply</div>
-        <ul>
-          <li>2 Spratt Beds™</li>
-          <li>Lifetime AirMood™ cartridges</li>
-          <li>Spratt App™ Premium forever</li>
-          <li>Name in founder credits</li>
-        </ul>
-        <button class="pbtn" data-tier="Pack Leader" data-amount="399">Pledge $399</button>
-        <div class="left">Limited to 25 backers</div>
+        <div class="sub">Lifetime scent supply</div>
+        <ul><li>2 Spratt Beds™</li><li>Lifetime scent cartridges</li><li>Premium app access forever</li><li>Name in founder credits</li></ul>
+        <a class="btn btn-ghost" href="#reserve">Pledge $399</a>
+        <div class="note">Limited to 25 backers</div>
       </div>
+    </div>
+
+    <div class="journey reveal">
+      <p class="eyebrow">Pledge once, then you're in the build</p>
+      <h3>More than a pre-order &mdash; a seat in the process.</h3>
+      <p class="muted" style="margin:10px 0 0; max-width:64ch">Reserving a Spratt Bed&trade; holds your founder pricing and your spot in the first run &mdash; but it also puts you on the inside. As we get closer to launch, founders get email updates straight from the team.</p>
+      <div class="jgrid">
+        <div class="jrow"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19C5 11 11 5 19 5c0 8-6 14-14 14z"/><path d="M5 19c4-4 7-6 11-7"/></svg></div><div><b>Fragrance reveals &amp; benefits</b><span>Which fragrances are launching and what each one actually does &mdash; the air-purifying clean, plus calming botanicals like chamomile.</span></div></div>
+        <div class="jrow"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6l-5 9a1.5 1.5 0 0 0 1.4 2.2h11.2A1.5 1.5 0 0 0 19 18l-5-9V3"/><path d="M7.5 14h9"/></svg></div><div><b>The science, unsealed</b><span>Full ingredient breakdowns and the safety screening behind every cartridge &mdash; shared with backers first.</span></div></div>
+        <div class="jrow"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3" width="10" height="18" rx="2.5"/><path d="M11 18h2"/></svg></div><div><b>App &amp; feature drops</b><span>New SprattOS&trade; capabilities as they ship — from scheduling to weight tracking and more.</span></div></div>
+        <div class="jrow"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5h14a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H9l-4 4z"/></svg></div><div><b>A say in the details</b><span>Prototypes, choices, and the calls we're still making &mdash; your input helps shape the final bed.</span></div></div>
+      </div>
+      <p class="jseal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span><b>Backers only —</b> our premium fragrance options and the benefit behind each one are revealed to the people who pledge, first.</span></p>
+      <div class="signup">
+        <input type="email" placeholder="you@email.com" aria-label="Email address for launch updates">
+        <button class="btn btn-light" type="button">Keep me posted</button>
+      </div>
+      <p class="signup-ok"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg> You're on the list &mdash; watch your inbox as we get closer to launch.</p>
+      <p class="signote">Launch updates only. No spam, and you can opt out any time.</p>
     </div>
   </div>
 </section>
 
-<!-- STORY -->
-<section class="sec story" id="story">
-  <div class="wrap story-grid">
-    <div>
-      <div class="eyebrow">Why we built it</div>
-      <h2 style="font-size:clamp(30px,4vw,42px);color:var(--navy);margin:14px 0 18px;">Spratt Labs is a small team with one stubborn idea.</h2>
-      <p>Every time our dogs came back from a run or the yard, they brought the smell inside with them. The only ways to keep up were spraying them down with something every single time, or booking grooming so often it got expensive fast — and neither actually kept things fresh for long.</p>
-      <p>We wanted a way to control that smell continuously, quietly in the background — without spraying our dogs or living at the groomer — and to make the bed itself genuinely better while we were at it. That's what led us to build SprattOS<span class="tm">™</span>: sensing, airflow, purification, and pet-safe scent in one comfortable bed. It took a lot of burned-out prototypes, and the Spratt Bed is now heading into its first production run.</p>
-      <p>Backing the pre-launch puts you in the room for the part we care about most: getting the details right before we make thousands of them.</p>
+<!-- TEAM -->
+<section id="team">
+  <div class="wrap">
+    <div class="shead reveal">
+      <p class="eyebrow">Who's behind it</p>
+      <h2>A small team that sweats the safety details.</h2>
+      <p class="lead">Spratt Labs is engineer-led. The people deciding what goes into the air around your dog are the same people who'd put it around their own pets &mdash; chemical engineers, hardware and product designers, and a founder who started this because of his own dog.</p>
     </div>
-    <div class="founder-card">
-      <div class="who"><div class="avatar">SL</div><div><b>The Spratt Labs Team</b><span>Founders, SprattOS™</span></div></div>
-      <div class="quote">"It came down to the smell — and how exhausting it was to keep up with. We didn't want to spray our dogs every time they ran in, or live at the groomer. We wanted something that quietly handles it, in a bed that's better to begin with."</div>
+    <div class="tgrid reveal">
+      <div class="tmember"><div class="av">HG</div><h3>Harold Gaines</h3><div class="role">Founder &amp; CEO</div><p>Started Spratt Labs after years of fighting the smell his own dog brought home. Leads product, brand, and the launch.</p></div>
+      <div class="tmember"><div class="av">Z</div><h3>Zainab</h3><div class="role">Chemical Engineer &middot; Formulation</div><p>Leads the fragrance and safety research &mdash; the diffusion chemistry, the water-based fragrances, and the screening that keeps every ingredient safe for dogs, cats, and people.</p></div>
+      <div class="tmember"><div class="av">J</div><h3>Jonathan</h3><div class="role">Hardware &amp; Diffusion Engineer</div><p>Designed the SprattOS&trade; diffusion system from scratch &mdash; the dry-air mechanism that disperses scent without water, heat, or residue.</p></div>
+      <div class="tmember"><div class="av"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="6" r="2"/><path d="M12 8v3M12 11 6.5 20M12 11l5.5 9"/><path d="M7.5 17h9"/></svg></div><h3>Design &amp; CAD</h3><div class="role">Industrial &amp; Product Design</div><p>Designed the bed itself &mdash; the form, the materials, and the supportive cushion your dog wants to sleep on, with the technology hidden inside.</p></div>
     </div>
   </div>
 </section>
 
 <!-- FAQ -->
-<section class="sec" id="faq">
+<section id="faq" class="alt">
   <div class="wrap">
-    <div class="sec-head" style="margin:0 auto 44px;text-align:center">
-      <div class="eyebrow">Good questions</div>
-      <h2>The things people ask first.</h2>
-    </div>
-    <div class="faq-list">
-      <details open><summary>Is my $5 reservation a charge for the bed?<span class="pm">+</span></summary><p>No. It's a small, fully refundable deposit that holds your founder pricing and your spot in the first run. You're only charged for a Spratt Bed when the Kickstarter campaign launches and you confirm your pledge.</p></details>
-      <details><summary>Does the bed diffuse on its own when my dog lies down?<span class="pm">+</span></summary><p>No — and this is the part people most often get wrong. AirSense™ recognizes your dog, but every release is controlled by you in the Spratt App™. Run it on demand with manual boost, set a schedule, or pause it. The bed does not spray automatically just because your dog settles in.</p></details>
-      <details><summary>Then what is AirSense™ for?<span class="pm">+</span></summary><p>AirSense™ recognizes your dog and confirms the bed is in use — intentionally separate from the diffusion you control. It's also the foundation for features we're building next, like weight monitoring and health insights, so the same hardware keeps getting more useful through SprattOS™ updates.</p></details>
-      <details><summary>Are the AirMood™ scents safe for dogs, cats, and kids?<span class="pm">+</span></summary><p>Yes. SprattOS™ uses dry diffusion rather than wet sprays, and AirMood™ oils were developed and confirmed by chemical engineers to be safe for families and pets — including cats, which many household scents are not. You control intensity in the app, and AirPure™ can deodorize fragrance-free. The full ingredient breakdown is shared with pledgers.</p></details>
-      <details><summary>When does the Spratt Bed ship?<span class="pm">+</span></summary><p>We're targeting first deliveries in early 2027 after the Kickstarter campaign closes and tooling is finalized. Founders ship first, and we'll post timeline updates the whole way.</p></details>
-      <details><summary>What happens if the campaign doesn't fund?<span class="pm">+</span></summary><p>If we don't hit our goal, every reservation deposit is refunded in full — that's the point of keeping it refundable. You risk nothing by reserving early.</p></details>
+    <div class="shead reveal"><p class="eyebrow">Good questions</p><h2>The things people ask first.</h2></div>
+    <div class="faq reveal">
+      <details open><summary>Is my $5 reservation a charge for the bed?</summary><div class="ans">No. It's a small, fully refundable deposit that holds your founder pricing and your spot in the first run. You're only charged for a Spratt Bed when the Kickstarter campaign launches and you confirm your pledge.</div></details>
+      <details><summary>Does the bed spray on its own when my dog gets in?</summary><div class="ans">No — this is the part people most often get wrong. The bed senses when your dog gets in, but it never sprays on its own. Every release runs on settings you choose in the app — on a schedule, only while your dog is away, or a set time after they get in. Run it on demand or pause it entirely.</div></details>
+      <details><summary>Then what do the sensors do?</summary><div class="ans">They detect when your dog gets in or leaves the bed, and they track your dog's weight over time. The sensing is deliberately separate from the air refresh, which you control. Because the hardware is already there, future SprattOS™ updates can add more health insights down the line.</div></details>
+      <details><summary>Are the scents safe for dogs, cats, and kids?</summary><div class="ans">Yes. SprattOS™ uses dry diffusion rather than wet sprays, and the fragrances were developed and confirmed by chemical engineers to be safe for families and pets — including cats, which many household scents are not. You set the intensity in the app, and it can deodorize fragrance-free. The full ingredient breakdown is shared with pledgers.</div></details>
+      <details><summary>When does the Spratt Bed ship?</summary><div class="ans">We're targeting first deliveries in early 2027 after the Kickstarter campaign closes and tooling is finalized. Founders ship first, and we'll post timeline updates the whole way.</div></details>
+      <details><summary>What happens if the campaign doesn't fund?</summary><div class="ans">If we don't hit our goal, every reservation deposit is refunded in full — that's the point of keeping it refundable. You risk nothing by reserving early.</div></details>
     </div>
   </div>
 </section>
 
 <!-- FINAL CTA -->
-<section class="final">
+<section id="reserve" class="final">
   <div class="wrap">
-    <div class="eyebrow" style="color:#bcd6ff">Founder pricing is going fast</div>
-    <h2>Get in before launch day.</h2>
-    <p>Only <b id="final-left">19</b> founder spots remain at 40% off the Spratt Bed™. Reserve yours with a refundable $5 deposit.</p>
-    <button class="btn btn-primary" data-tier="Founder Reservation" data-amount="5" data-founder="1">Reserve a founder spot — $5</button>
-    <div><a href="#" class="ks-badge" id="ks-final"><span class="kmark">k</span> Notify me on Kickstarter</a></div>
+    <p class="eyebrow reveal" style="display:inline-block">Founder pricing is going fast</p>
+    <h2 class="reveal">Get in before launch day.</h2>
+    <p class="lead reveal" style="margin:0 auto">Only 19 founder spots remain at 40% off the Spratt Bed™. Reserve yours with a refundable $5 deposit.</p>
+    <div class="hbtns reveal">
+      <a class="btn btn-blue" href="#reserve">Reserve your spot · $5 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="btn btn-ghost" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4v16M7 12l8-8M7 12l8 8"/></svg> Notify me on Kickstarter</a>
+    </div>
+    <div class="spots reveal"><b>31</b> reserved · <b>19</b> spots left · Kickstarter July 15</div>
   </div>
 </section>
 
-<footer>
-  <div class="wrap foot">
-    <div class="logo">SPRATT <span>LABS</span></div>
-    <div>
-      <a href="#os">SprattOS</a>
-      <a href="#pledge">Pledge</a>
-      <a href="#faq">FAQ</a>
-      <a href="#">Privacy</a>
-    </div>
-  </div>
-  <div class="wrap" style="margin-top:18px;font-size:12px;opacity:.7">© 2026 Spratt Labs™. Spratt Bed™ and SprattOS™ are patent-pending. AirSense™, AirFlow™, AirPure™, AirMood™, and Spratt App™ are trademarks of Spratt Labs. Reservation deposits are fully refundable.</div>
-</footer>
+</main>
 
-<!-- MODAL -->
-<div class="overlay" id="overlay">
-  <div class="modal" id="modal">
-    <button class="x" id="closeM" aria-label="Close">×</button>
-    <div id="formView">
-      <div class="pill" id="pill">🐾 Founder Reservation · $5</div>
-      <h3>Lock in your spot</h3>
-      <p class="sub">Enter your email and we'll hold your founder pricing. We'll only reach out about your reservation and the launch.</p>
-      <label for="email">Email address</label>
-      <input type="email" id="email" placeholder="you@email.com" autocomplete="email">
-      <button class="go" id="submitR">Confirm reservation</button>
-      <p class="fine">Refundable deposit — no charge until the campaign launches. We never share your email.</p>
-    </div>
-    <div id="successView" class="success" style="display:none">
-      <div class="check">✓</div>
-      <h3>You're in!</h3>
-      <p class="sub" id="successMsg">Your founder spot is reserved. Watch your inbox for launch-day details.</p>
-      <button class="go" id="doneR">Done</button>
-    </div>
+<footer>
+  <div class="fmain">
+    <span class="brand">
+      <span class="logo-mark"><svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-label="Spratt Labs"><rect width="120" height="120" rx="30" fill="#0e1320"/><path d="M53 31 L48 18 L60 27 Z" fill="#ffffff"/><path d="M74 44 C74 32 52 30 44 40 C36 49 50 56 60 60 C70 64 84 71 76 82 C68 92 46 90 40 78" fill="none" stroke="#ffffff" stroke-width="6.5" stroke-linecap="butt" stroke-linejoin="round"/></svg></span>
+      <span class="word">SPRATT&nbsp;LABS</span>
+    </span>
+    <nav class="fnav">
+      <a href="#os">SprattOS</a><a href="#safety">Safety</a><a href="#value">Value</a><a href="#fit">Sizes</a>
+      <a href="#story">The Story</a><a href="#team">Team</a><a href="#pledge">Pledge</a><a href="#faq">FAQ</a>
+    </nav>
   </div>
-</div>
+  <div class="legal"><p>© 2026 Spratt Labs™. Spratt Bed™ and SprattOS™ are patent-pending trademarks of Spratt Labs. Reservation deposits are fully refundable. Specifications, formulations, and safety claims reflect current development and are subject to change.</p></div>
+</footer>
 
 <script>
 (function(){
-  "use strict";
-  var GOAL = 30000;
-  var FOUNDER_CAP = 50;
-  var DEFAULT = { backers: 31, pledged: 9240, founders: 31 };
-  var KEY = "sprattbed:stats";
-  var LAUNCH = new Date("2026-07-15T09:00:00").getTime();
-  var stats = Object.assign({}, DEFAULT);
-  var current = null;
-
-  function money(n){ return Math.round(n).toLocaleString("en-US"); }
-  function set(id, val){ var el = document.getElementById(id); if(el) el.textContent = val; }
-
-  function render(){
-    var pct = Math.min(100, Math.round((stats.pledged / GOAL) * 100));
-    var spotsLeft = Math.max(0, FOUNDER_CAP - stats.founders);
-    set("raised", money(stats.pledged));
-    set("pct", pct + "%");
-    set("backers", stats.backers);
-    set("spots", spotsLeft);
-    set("left-founder", spotsLeft);
-    set("final-left", spotsLeft);
-    set("tk-back", stats.founders);
-    var bar = document.getElementById("barfill");
-    if(bar){ requestAnimationFrame(function(){ bar.style.width = pct + "%"; }); }
-    if(spotsLeft <= 0){
-      document.querySelectorAll('[data-founder="1"]').forEach(function(b){
-        b.disabled = true; b.style.opacity = ".5"; b.style.cursor = "not-allowed";
-        if(b.classList.contains("pbtn")) b.textContent = "Founder spots full";
-      });
+  var mb=document.querySelector('.menu-btn');
+  if(mb)mb.addEventListener('click',function(){document.querySelector('header').classList.toggle('open')});
+  document.querySelectorAll('nav a, .nav-cta').forEach(function(a){
+    a.addEventListener('click',function(){document.querySelector('header').classList.remove('open')});});
+  var els=document.querySelectorAll('.reveal');
+  function showAll(){els.forEach(function(e){e.classList.add('in')})}
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){
+      if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.08});
+    els.forEach(function(e){io.observe(e)}); setTimeout(showAll,1800);
+  } else showAll();
+  // founder video placeholder (replace with a real embed)
+  var vid=document.querySelector('.video');
+  if(vid){ vid.addEventListener('click',function(){
+    var pl=vid.querySelector('.vplay'), so=vid.querySelector('.vsoon');
+    if(pl) pl.style.display='none'; if(so) so.style.display='flex';
+  }); }
+  // email signup (placeholder — wire to Klaviyo/your ESP)
+  var su=document.querySelector('.signup');
+  if(su){
+    var inp=su.querySelector('input'), btn=su.querySelector('button'),
+        ok=document.querySelector('.signup-ok');
+    function submitEmail(){
+      var v=(inp.value||'').trim();
+      if(v.indexOf('@')>0 && v.lastIndexOf('.')>v.indexOf('@')+1){
+        su.style.display='none'; if(ok)ok.style.display='flex';
+      } else { inp.focus(); inp.style.borderColor='#fff'; inp.style.boxShadow='0 0 0 1px #fff'; }
     }
+    btn.addEventListener('click',submitEmail);
+    inp.addEventListener('keydown',function(e){ if(e.key==='Enter') submitEmail(); });
   }
-
-  async function loadStats(){
-    try{
-      var r = await window.storage.get(KEY, true);
-      if(r && r.value){ stats = Object.assign({}, DEFAULT, JSON.parse(r.value)); }
-    }catch(e){}
-    render();
-  }
-  async function saveStats(){
-    try{ await window.storage.set(KEY, JSON.stringify(stats), true); }catch(e){}
-  }
-
+  // countdown to Kickstarter
+  var target=new Date('2026-07-15T09:00:00').getTime();
   function tick(){
-    var diff = LAUNCH - Date.now(); if(diff < 0) diff = 0;
-    set("cd-d", String(Math.floor(diff/86400000)).padStart(2,"0"));
-    set("cd-h", String(Math.floor(diff%86400000/3600000)).padStart(2,"0"));
-    set("cd-m", String(Math.floor(diff%3600000/60000)).padStart(2,"0"));
-    set("cd-s", String(Math.floor(diff%60000/1000)).padStart(2,"0"));
+    var d=target-Date.now(); if(d<0)d=0;
+    var D=Math.floor(d/864e5),H=Math.floor(d%864e5/36e5),M=Math.floor(d%36e5/6e4),S=Math.floor(d%6e4/1e3);
+    function p(n){return (n<10?'0':'')+n}
+    var el=document.getElementById('cd'); if(el)el.innerHTML=
+      '<div><div class="num">'+p(D)+'</div><div class="u">Days</div></div>'+
+      '<div><div class="num">'+p(H)+'</div><div class="u">Hrs</div></div>'+
+      '<div><div class="num">'+p(M)+'</div><div class="u">Min</div></div>'+
+      '<div><div class="num">'+p(S)+'</div><div class="u">Sec</div></div>';
   }
-  setInterval(tick, 1000); tick();
-
-  var overlay = document.getElementById("overlay");
-  function openModal(tier, amount, founder){
-    current = { tier: tier, amount: +amount, founder: founder === "1" };
-    document.getElementById("pill").textContent = "🐾 " + tier + " · $" + amount;
-    document.getElementById("formView").style.display = "block";
-    document.getElementById("successView").style.display = "none";
-    document.getElementById("email").value = "";
-    overlay.classList.add("show");
-    setTimeout(function(){ document.getElementById("email").focus(); }, 60);
-  }
-  function closeModal(){ overlay.classList.remove("show"); }
-
-  document.querySelectorAll("[data-tier]").forEach(function(btn){
-    btn.addEventListener("click", function(){
-      if(btn.disabled) return;
-      openModal(btn.dataset.tier, btn.dataset.amount, btn.dataset.founder);
-    });
-  });
-  document.getElementById("closeM").addEventListener("click", closeModal);
-  document.getElementById("doneR").addEventListener("click", closeModal);
-  overlay.addEventListener("click", function(e){ if(e.target === overlay) closeModal(); });
-  document.addEventListener("keydown", function(e){ if(e.key === "Escape") closeModal(); });
-
-  document.getElementById("submitR").addEventListener("click", async function(){
-    var email = document.getElementById("email").value.trim();
-    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){
-      var inp = document.getElementById("email");
-      inp.style.borderColor = "#e0564f"; inp.focus(); return;
-    }
-    var btn = this; btn.disabled = true; btn.textContent = "Reserving…";
-    stats.backers += 1;
-    stats.pledged += current.amount;
-    if(current.founder) stats.founders += 1;
-    await saveStats();
-    render();
-    document.getElementById("formView").style.display = "none";
-    document.getElementById("successView").style.display = "block";
-    document.getElementById("successMsg").textContent =
-      current.founder
-        ? "Your founder spot is reserved at 40% off. Watch your inbox for launch-day details."
-        : "Your " + current.tier + " pledge is locked in. We'll confirm it the day the campaign goes live.";
-    btn.disabled = false; btn.textContent = "Confirm reservation";
-  });
-
-  loadStats();
+  tick(); setInterval(tick,1000);
 })();
 </script>
 </body>
